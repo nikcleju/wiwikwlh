@@ -1,36 +1,41 @@
+<!--
 <p class="center logo">
-![](img/title.png)
+<h1>Information Theory 2015-2016</h1> ![](img/title.png)
 </p>
+-->
 
-Stephen Diehl (<a class="author" href="https://twitter.com/smdiehl">@smdiehl</a> )
 
-This is the fourth draft of this document.
+Information Theory 2015-2016
+======
 
-**License**
+Nicolae Cleju, <!--(<a class="author" href="https://twitter.com/smdiehl">@smdiehl</a> )-->
 
-This code and text are dedicated to the public domain. You can copy, modify,
-distribute and perform the work, even for commercial purposes, all without
-asking permission.
+Faculty of Electronics, Telecommunications and Information Technology,
 
-You may copy and paste any code here verbatim into your codebase, wiki, blog,
-book or Haskell musical production as you see fit.
+The "Gheorghe Asachi" Technical University of Iasi.
 
-The Markdown and Haskell source is [available on
-Github](https://github.com/sdiehl/wiwinwlh/tree/master/src). Pull requests are
-always accepted for changes and additional content. This is a living document
+This page contains all the materials and information for the course of Information
+Theory taking place during second semester 2015-2016.
+
+Feel free to contact me for any questions, problems or comments regarding this material
+or anything else discussed in class.
 
 
 Introduction
 ======
 
-Professors:
+The teaching activities are performed by:
 
 * Lectures: Nicolae Cleju (nikcleju@etti.tuiasi.ro)
-* Laboratory: Daniel Matasaru (dmatasaru@etti.tuiasi.ro@etti.tuiasi.ro)
+* Laboratory: Daniel Matasaru (dmatasaru@etti.tuiasi.ro)
 
 Office hours: TBD
 
-Grading: final grade = 0.75 exam grade + 0.25 lab grade
+The final grade for the class is computed as follows:
+
+    final grade = 0.75 exam grade + 0.25 lab grade
+
+The teaching activities consist of:
 
 * 14 weeks of lectures (3h each)
 * 14 weeks of laboratories (2h each)
@@ -79,7 +84,7 @@ Final grade = 0.75 Exam + 0.25 Lab
 
 
 ### Course structure
-1. Pam
+1. Introduction to probabilities
 2. Pam
 
 
@@ -88,6 +93,40 @@ Final grade = 0.75 Exam + 0.25 Lab
 1. Pam Pam
 1. HamHam
 1. Yoyo
+
+
+Introduction to probabilities
+-----
+
+### Basic notions of probability
+Random variable = the outcome of an experiment 
+
+Distribution (probability mass function)
+
+Discrete distribution
+
+Alphabet
+
+### Basic properties
+Two independent events: $$P(A \cap B) = P(A) \cdot P(B)$$
+
+
+Chapter I: Discrete information sources
+-----
+
+$\newcommand{\source3}[4]{$#1: \left( \begin{matrix} s_1 & s_2 & s_3 \\ #2 & #3 & #4 \end{matrix} \right)}$
+
+### Discrete memoryless source
+
+* Is a random variable that takes, succesively, different independent values according to a certain distribution
+
+$S: \left( \begin{matrix} s_1 & s_2 & s_3 \\ \frac12 & \frac{1}{4} & \frac{1}{4} \end{matrix} \right)$
+$ \source3{S}{\frac12}{\frac14}{\frac14} $
+
+* Discrete: a discrete set of possible values
+* Complete: $\sum p(s_i) = 1$
+* Memoryless: succesive values are independent of previous values (think of a coin)
+
 
 
 <!-- </div> -->

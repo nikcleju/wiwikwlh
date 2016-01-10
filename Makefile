@@ -1,6 +1,6 @@
 PANDOC = pandoc
 IFORMAT = markdown
-FLAGS = --standalone --toc --toc-depth=2 --highlight-style pygments
+FLAGS = --standalone --toc --toc-depth=2 --highlight-style pygments --mathml
 TEMPLATE = page.tmpl
 STYLE = css/style.css
 
@@ -19,10 +19,13 @@ all: $(HTML)
 includes: includes.hs
 	$(GHC) --make $< ; \
 
+#%.html: %.md includes
+#	./includes < $<  \
+#	| $(PANDOC) -c $(STYLE) --template $(TEMPLATE) -s -f $(IFORMAT) -t html $(FLAGS) \
+#	| sed '/<extensions>/r extensions.html' > $@
 %.html: %.md includes
-	./includes < $<  \
-	| $(PANDOC) -c $(STYLE) --template $(TEMPLATE) -s -f $(IFORMAT) -t html $(FLAGS) \
-	| sed '/<extensions>/r extensions.html' > $@
+	< $<  \
+	$(PANDOC) -c $(STYLE) --template $(TEMPLATE) -s -f $(IFORMAT)+latex_macros -t html+latex_macros $(FLAGS) > $@
 
 %.epub: %.md includes
 	./includes < $< | $(PANDOC) -f $(IFORMAT) -t epub $(FLAGS) -o $@
