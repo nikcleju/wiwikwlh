@@ -23,8 +23,12 @@ includes: includes.hs
 #	./includes < $<  \
 #	| $(PANDOC) -c $(STYLE) --template $(TEMPLATE) -s -f $(IFORMAT) -t html $(FLAGS) \
 #	| sed '/<extensions>/r extensions.html' > $@
-%.html: %.md includes
-	< $<  \
+#
+#%.html: %.md slides.md includes
+#	< $<  \
+#	$(PANDOC) -c $(STYLE) --template $(TEMPLATE) -s -f $(IFORMAT)+latex_macros -t html+latex_macros $(FLAGS) > $@
+%.html: %.md slides.md includes
+	cat $< macros.md slides.md | \
 	$(PANDOC) -c $(STYLE) --template $(TEMPLATE) -s -f $(IFORMAT)+latex_macros -t html+latex_macros $(FLAGS) > $@
 
 %.epub: %.md includes
@@ -35,3 +39,10 @@ includes: includes.hs
 
 clean:
 	-rm $(CHAPTERS) $(HTML)
+
+slides: 
+	< slides.md \
+	$(PANDOC) -s -f $(IFORMAT)+latex_macros -t beamer -o slides.pdf --slide-level 3 --include-in-header macros.md
+#	pdflatex slides.tex slides.pdf
+
+	
