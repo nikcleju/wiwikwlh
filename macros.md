@@ -24,14 +24,12 @@
 \let\svendcolumn\endcolumn
 \newlength\columnskip
 \columnskip 0pt
-\def\newcolumn{%
-  \renewenvironment{column}[2]%
-    {\svcolumn{##1}\setlength{\parskip}{\columnskip}##2}%
+\def\newcolumn{
+  \renewenvironment{column}[2]
+    {\svcolumn{##1}\setlength{\parskip}{\columnskip}##2}
     {\svendcolumn\vspace{\columnskip}}}
 
-%\newcommand\stretchy{\
-  \newpar\def\item{\svitem\newitem}%
-  \renewenvironment{itemize}{\svitemize}{\svenditemize\newpar\par}%
-  \renewenvironment{center}{\svcenter\newpar}{\svendcenter\newpar}%
-%  \newcolumn
-%}
+\newpar\def\item{\svitem\newitem}
+\renewenvironment{itemize}{\svitemize}{\svenditemize\newpar\par}
+\renewenvironment{center}{\svcenter\newpar}{\svendcenter\newpar}
+

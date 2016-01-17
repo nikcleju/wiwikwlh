@@ -111,3 +111,22 @@ Suppose I choose a number according to the following distribution: ...
 
 * What distribution makes guessing the number the most difficult?
 * What distribution makes guessing the number the easiest?
+
+### Entropy of a discrete memoryless source
+
+### Properties of entropy
+
+1. It 
+
+2. is 
+
+3. cool
+
+
+### Sources with memory
+
+A text can be considered as a sequence of symbols drawn from a memoryless source.
+
+The distribution (frequencies) of letters in the Romanian language is close to:
+
+
