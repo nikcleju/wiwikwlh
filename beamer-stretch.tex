@@ -1,0 +1,159 @@
+\documentclass{beamer}
+
+\let\svpar\par
+\let\svitemize\itemize
+\let\svenditemize\enditemize
+\let\svitem\item
+\def\newpar{\def\par{\svpar\vfill}}
+\def\newitem{\def\item{\vfill\svitem}}
+\let\svcenter\center
+\let\svendcenter\endcenter
+\let\svcolumn\column
+\let\svendcolumn\endcolumn
+\newlength\columnskip
+\columnskip 0pt
+\def\newcolumn{%
+  \renewenvironment{column}[2]%
+    {\svcolumn{##1}\setlength{\parskip}{\columnskip}##2}%
+    {\svendcolumn\vspace{\columnskip}}}
+
+\newcommand\stretchy{\only<2>{%
+  \newpar\def\item{\svitem\newitem}%
+  \renewenvironment{itemize}{\svitemize}{\svenditemize\newpar\par}%
+  \renewenvironment{center}{\svcenter\newpar}{\svendcenter\newpar}%
+  \newcolumn
+}}
+
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{A few paragraphs (with\only<1>{out} stretching)}
+\stretchy
+
+As any dedicated reader can clearly see, the Ideal of practical reason is a representation of the things in themselves.
+
+I have shown elsewhere, the phenomena should only be used as a canon for our understanding.
+
+The paralogisms of practical reason are what first give rise to the architectonic of practical reason.
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Displayed equation (with\only<1>{out} stretching)}
+\stretchy
+
+As any dedicated reader can clearly see, the Ideal of practical reason is a representation of the things in themselves.
+
+I have shown elsewhere, the phenomena should only be used as a canon for our understanding.
+\begin{equation*}
+x^2 + y^2 = z^2
+\end{equation*}
+The paralogisms of practical reason are what first give rise to the architectonic of practical reason.
+
+Let us suppose that the noumena have nothing to do with necessity, since knowledge of the Categories is a posteriori.
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Mid-par equation (with\only<1>{out} stretching)}
+\stretchy
+
+As any dedicated reader can clearly see, the Ideal of practical reason is a representation of the things in themselves.
+
+I have shown elsewhere,
+\begin{equation*}
+x^2 + y^2 = z^2
+\end{equation*}
+the phenomena should only be used as a canon for our understanding.
+
+The paralogisms of practical reason are what first give rise to the architectonic of practical reason.
+
+Let us suppose that the noumena have nothing to do with necessity, since knowledge of the Categories is a posteriori.
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Items (with\only<1>{out} stretching)}
+\stretchy
+
+\begin{itemize}
+\item As any dedicated reader can clearly see, the Ideal of practical reason is a representation of the things in themselves.
+\item I have shown elsewhere, the phenomena should only be used as a canon for our understanding.
+\item The paralogisms of practical reason are what first give rise to the architectonic of practical reason.
+\end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Items with subitems (with\only<1>{out} stretching)}
+\stretchy
+
+\begin{itemize}
+\item As any dedicated reader can clearly see, the Ideal of practical reason is a representation of the things in themselves.
+\begin{itemize}
+\item I have shown elsewhere, the phenomena should only be used as a canon for our understanding.
+\item The paralogisms of practical reason are what first give rise to the architectonic of practical reason.
+\end{itemize}
+\item Let us suppose that the noumena have nothing to do with necessity, since knowledge of the Categories is a posteriori.
+\end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Items and paragraphs (with\only<1>{out} stretching)}
+\stretchy
+
+As any dedicated reader can clearly see,
+\begin{itemize}
+\item The Ideal of practical reason is a representation of the things in themselves.
+\item I have shown elsewhere, the phenomena should only be used as a canon for our understanding.
+\item The paralogisms of practical reason are what first give rise to the architectonic of practical reason.
+\end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Items with equation (with\only<1>{out} stretching)}
+\stretchy
+
+\begin{itemize}
+\item As any dedicated reader can clearly see, the Ideal of practical reason is a representation of the things in themselves.
+\item I have shown elsewhere, the phenomena should only be used as a canon for our understanding.
+\begin{equation*}
+x^2 + y^2 = z^2
+\end{equation*}
+\item The paralogisms of practical reason are what first give rise to the architectonic of practical reason.
+\end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Items with centred text (with\only<1>{out} stretching)}
+\stretchy
+
+\begin{itemize}
+\item As any dedicated reader can clearly see, the Ideal of practical reason is a representation of the things in themselves.
+\item I have shown elsewhere, the phenomena should only be used as a canon for our understanding.
+\begin{center}
+There can be no doubt that the objects \dots
+\end{center}
+\item The paralogisms of practical reason are what first give rise to the architectonic of practical reason.
+\end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Columns (with\only<1>{out} stretching)}
+\stretchy
+
+\begin{columns}[c]
+\column{1.5in}
+As any dedicated reader can clearly see,
+
+the Ideal of practical reason is
+
+a representation of the things in themselves.
+
+\column{1.5in}
+\begin{itemize}
+\item The paralogisms of practical reason 
+\item are what first give rise to
+\item the architectonic of practical reason.
+\end{itemize}
+\end{columns}
+
+\end{frame}
+
+\end{document}

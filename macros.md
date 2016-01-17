@@ -10,3 +10,28 @@
 \newcommand{\fIoVII}{\frac{1}{7}}
 \newcommand{\fIoVIII}{\frac{1}{8}}
 \addtobeamertemplate{block begin}{}{\setlength{\parskip}{35pt plus 1pt minus 1pt}}
+\addtobeamertemplate{block begin}{}{\setlength{\parskip}{35pt plus 1pt minus 1pt}}
+
+\let\svpar\par
+\let\svitemize\itemize
+\let\svenditemize\enditemize
+\let\svitem\item
+\def\newpar{\def\par{\svpar\vfill}}
+\def\newitem{\def\item{\vfill\svitem}}
+\let\svcenter\center
+\let\svendcenter\endcenter
+\let\svcolumn\column
+\let\svendcolumn\endcolumn
+\newlength\columnskip
+\columnskip 0pt
+\def\newcolumn{%
+  \renewenvironment{column}[2]%
+    {\svcolumn{##1}\setlength{\parskip}{\columnskip}##2}%
+    {\svendcolumn\vspace{\columnskip}}}
+
+%\newcommand\stretchy{\
+  \newpar\def\item{\svitem\newitem}%
+  \renewenvironment{itemize}{\svitemize}{\svenditemize\newpar\par}%
+  \renewenvironment{center}{\svcenter\newpar}{\svendcenter\newpar}%
+%  \newcolumn
+%}

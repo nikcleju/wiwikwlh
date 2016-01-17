@@ -27,7 +27,7 @@ includes: includes.hs
 #%.html: %.md slides.md includes
 #	< $<  \
 #	$(PANDOC) -c $(STYLE) --template $(TEMPLATE) -s -f $(IFORMAT)+latex_macros -t html+latex_macros $(FLAGS) > $@
-%.html: %.md slides.md includes
+%.html: %.md slides.md
 	cat $< macros.md slides.md | \
 	$(PANDOC) -c $(STYLE) --template $(TEMPLATE) -s -f $(IFORMAT)+latex_macros -t html+latex_macros $(FLAGS) > $@
 
@@ -43,6 +43,9 @@ clean:
 slides: 
 	< slides.md \
 	$(PANDOC) -s -f $(IFORMAT)+latex_macros -t beamer -o slides.pdf --slide-level 3 --include-in-header macros.md
-#	pdflatex slides.tex slides.pdf
+
+slidestex: 
+	< slides.md \
+	$(PANDOC) -s -f $(IFORMAT)+latex_macros -t beamer -o slides.tex --slide-level 3 --include-in-header macros.md
 
 	

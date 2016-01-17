@@ -1,5 +1,4 @@
 
-
 Slides
 ======
 
@@ -34,6 +33,7 @@ Final grade = 0.75 Exam + 0.25 Lab
 1. Pam Pam
 1. HamHam
 1. Yoyo
+
 
 
 Introduction to probabilities
@@ -91,3 +91,23 @@ information that a particular message took place.
 
 The information attached to a particular event (message) is rigorously defined as:
 $$i(s_i) = -log(p(s_i))$$
+
+
+... 
+
+### Example - Game
+Game: I think of a number between 1 and 8. You have to guess it by asking
+yes/no questions.
+
+* How much indetermination does the problem have?
+* How is the best way to ask questions? Why?
+* What if the questions are not asked in the best way?
+* On average, what is the number of questions required to find the number?
+
+### Example - Game v2
+Suppose I choose a number according to the following distribution: ...
+
+* On average, what is the number of questions required to find the number?
+
+* What distribution makes guessing the number the most difficult?
+* What distribution makes guessing the number the easiest?
