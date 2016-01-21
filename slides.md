@@ -1,9 +1,7 @@
 
-Slides
-======
+# Slides
 
-Introduction
-------
+## Introduction
 
 ### Organization
 Professors:
@@ -36,8 +34,8 @@ Final grade = 0.75 Exam + 0.25 Lab
 
 
 
-Introduction to probabilities
------
+## Introduction to probabilities
+
 
 ### Basic notions of probability
 Random variable = the outcome of an experiment 
@@ -52,14 +50,56 @@ Alphabet
 Two independent events: $$P(A \cap B) = P(A) \cdot P(B)$$
 
 
-Chapter I: Discrete information sources
------
+## Chapter I: Discrete information sources
 
+
+### Block diagram of a communication system
+ de pus poza
+
+
+### What is information?
+
+Example:
+
+I tell you the following sentence: "your favorite football team lost the last match".
+
+Does this message carry information? How, why, how much?
+
+Consider the following facts:
+
+* the message carries information only because you didn't already know the result.
+* if you already known the result, the message is useless (brings no information)
+* since you didn't know the result, there were multiple results possible (win, equal or lose)
+* the actual information in the message is that *lost* happened, and not *win* or *equal*
+* if the result was to be expected, there is little information. If the result
+is highly unusual, there is more information in this message
+
+
+### Information source
+
+We will always consider information in a context similar to the above example.
+
+We will use terminology from probability theory to define information:
+
+* there is a *probabilistic source* that can produce a number of different *events*.
+* each event has a certain probability. We know all the probabilities beforehand.
+* at one time, an event is randomly selected according to its probability.
+* afterwards, a new message can be selected, and so on ==> a stream of messages is produced.
+
+The source is called an *information source* and the selected event is a *message*.
+
+A message carries the information that **it** happened, and not the other possible message events that could have been selected.
+
+The quantity of information is dependent in its probability.
 
 
 ### Discrete memoryless source
 
-Is a random variable that takes, succesively, different independent values according to a certain distribution:
+ = is an information source where the messages are **independent** , i.e. the choice of a message
+at one time does not depend on what were the previous message
+
+Each message has a fixed probability. The set of probabilities is the *distribution* of the source.
+
 $$\sIII{S}{\fIoII}{\fIoIV}{\fIoIV}$$
 
 Properties:
@@ -68,32 +108,52 @@ Properties:
 * Complete: $\sum p(s_i) = 1$
 * Memoryless: succesive values are independent of previous values (e.g. successive throws of a coin)
 
+A message from a DMS is also called a *random variable* in probabilistics.
+
+
 ### Examples
 
-A coin is a discrete memoryless source (DMS) with two possibilities (head, tail):
+A coin is a discrete memoryless source (DMS) with two messages (head, tail):
 $$\sII{S}{\fIoII}{\fIoII}$$
 
-A dice is a discrete memoryless source (DMS) with six possibilities:
+A dice is a discrete memoryless source (DMS) with six messages:
 $$\sVI{S}{\fIoVI}{\fIoVI}{\fIoVI}{\fIoVI}{\fIoVI}{\fIoVI}$$
 
-Winning the lottery can be modeled as DMS:
+Playing the lottery can be modeled as DMS:
 $$\sII{S}{0.9999}{0.0001}$$
 
-### Terminology
-The different choices are called *messages*.
+An extreme type of DMS containing the certain event:
+$$\sII{S}{1}{0}$$
 
-When an event takes place (e.g. throwing a coin/dice), it is said that
-the *DMS provides a message*.
 
 ### Information 
 When a DMS provides a new message, it gives out some new information, i.e. the
 information that a particular message took place.
 
 The information attached to a particular event (message) is rigorously defined as:
-$$i(s_i) = -log(p(s_i))$$
+$$i(s_i) = -log_2(p(s_i))$$
 
+Properties:
 
-... 
+* $i(s_i) \geq 0$
+* lower probability means higher information
+* higher probability means lower information
+* a certain event brings no information: $-log(1) = 0$
+* an event with probability 0 brings infinite information (but it never happens..)
+
+### Entropy of a DMS
+
+We usually don't care about a single message. We are interested in a large number of them
+(think millions of bits of data).
+
+We are interested in the *average* information of a message from a DMS.
+
+Definition: the entropy of a DMS source $S$ is **the average information of a message**:
+$$H(S) = \sum_{i} p_i i(s_i) = -\sum_{i} p_i log(p_i)$$
+where $p_i = p(s_i)$  is the probability of message $i$.
+
+...
+
 
 ### Example - Game
 Game: I think of a number between 1 and 8. You have to guess it by asking
