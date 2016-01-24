@@ -14,7 +14,7 @@ else
 	GHC=ghc
 endif
 
-all: $(HTML)
+all: html slides
 
 includes: includes.hs
 	$(GHC) --make $< ; \
@@ -27,9 +27,9 @@ includes: includes.hs
 #%.html: %.md slides.md includes
 #	< $<  \
 #	$(PANDOC) -c $(STYLE) --template $(TEMPLATE) -s -f $(IFORMAT)+latex_macros -t html+latex_macros $(FLAGS) > $@
-%.html: %.md slides.md
+html:   tutorial.md slides.md
 	cat $< macros.md slides.md | \
-	$(PANDOC) -c $(STYLE) --template $(TEMPLATE) -s -f $(IFORMAT)+latex_macros -t html+latex_macros $(FLAGS) > $@
+	$(PANDOC) -c $(STYLE) --template $(TEMPLATE) -s -f $(IFORMAT)+latex_macros -t html+latex_macros $(FLAGS) > tutorial.html
 
 %.epub: %.md includes
 	./includes < $< | $(PANDOC) -f $(IFORMAT) -t epub $(FLAGS) -o $@

@@ -33,7 +33,6 @@ Final grade = 0.75 Exam + 0.25 Lab
 1. Yoyo
 
 
-
 ## Introduction to probabilities
 
 
@@ -95,8 +94,8 @@ The quantity of information is dependent in its probability.
 
 ### Discrete memoryless source
 
- = is an information source where the messages are **independent** , i.e. the choice of a message
-at one time does not depend on what were the previous message
+A discrete memoryless source (DMS) is an information source where the messages are **independent** , i.e. the choice of a message
+at one time does not depend on what were the previous messages
 
 Each message has a fixed probability. The set of probabilities is the *distribution* of the source.
 
@@ -112,9 +111,8 @@ A message from a DMS is also called a *random variable* in probabilistics.
 
 
 ### Examples
-
-A coin is a discrete memoryless source (DMS) with two messages (head, tail):
-$$\sII{S}{\fIoII}{\fIoII}$$
+A coin is a discrete memoryless source (DMS) with two messages:
+$$\snII{S}{coin \_ head}{\fIoII}{coin \_ tail}{\fIoII}$$
 
 A dice is a discrete memoryless source (DMS) with six messages:
 $$\sVI{S}{\fIoVI}{\fIoVI}{\fIoVI}{\fIoVI}{\fIoVI}{\fIoVI}$$
@@ -122,9 +120,13 @@ $$\sVI{S}{\fIoVI}{\fIoVI}{\fIoVI}{\fIoVI}{\fIoVI}{\fIoVI}$$
 Playing the lottery can be modeled as DMS:
 $$\sII{S}{0.9999}{0.0001}$$
 
+### Examples
+
 An extreme type of DMS containing the certain event:
 $$\sII{S}{1}{0}$$
 
+Receiving an unknown *bit* (0 or 1) with equal probabilities:
+$$\snII{S}{0}{\fIoII}{1}{\fIoII}$$
 
 ### Information 
 When a DMS provides a new message, it gives out some new information, i.e. the
@@ -136,10 +138,11 @@ $$i(s_i) = -log_2(p(s_i))$$
 Properties:
 
 * $i(s_i) \geq 0$
-* lower probability means higher information
-* higher probability means lower information
+* lower probability (rare events) means higher information
+* higher probability (frequent events) means lower information
 * a certain event brings no information: $-log(1) = 0$
 * an event with probability 0 brings infinite information (but it never happens..)
+
 
 ### Entropy of a DMS
 
@@ -149,41 +152,130 @@ We usually don't care about a single message. We are interested in a large numbe
 We are interested in the *average* information of a message from a DMS.
 
 Definition: the entropy of a DMS source $S$ is **the average information of a message**:
-$$H(S) = \sum_{i} p_i i(s_i) = -\sum_{i} p_i log(p_i)$$
-where $p_i = p(s_i)$  is the probability of message $i$.
+$$H(S) = \sum_{k} p_k i(s_k) = -\sum_{k} p_k log_2(p_k)$$
+where $p_k = p(s_k)$  is the probability of message $k$.
 
-...
+
+### The choice of logarithm
+
+Any base of logarithm can be used in the definition.
+
+Usual convention: use binary logarithm $log_2()$. H(S) measured in *bits* (*bits / message*)
+
+If using natural logarithm $ln()$, H(S) is measured in $nats$.
+
+Logarithm bases can be converted to/from one another:
+$$ log_b(x) = \frac{log_a(x)}{log_a(b)} $$
+
+Entropies using different logarithms differ only in scaling:
+$$ H_b(S) =\frac{H_a(S)}{log_a(b)}  $$
+
+
+### Examples
+
+* Coin: $H(S) = 1 bit/message$
+* Dice: $H(S) = log(6) bits/message$
+* Lottery: $H(S) = -0.9999 log(0.9999) - 0.0001 log(0.0001)$
+* Receiving 1 bit: $H(S) = 1 bit/message$ (hence the name!)
+
+
+### Interpretation of the entropy
+
+All the following interpretations of entropy are true:
+
+* H(S) is the *average uncertainty* of the source S
+
+* H(S) is the *average information* of messages from source S
+
+* A long sequence of $N$ messages from $S$ has total information $\approx N \cdot H(S)$
+
+* H(S) is the minimum number of bits (0,1) required to uniquely represent an average message 
+from source S
+
+
+### Properties of entropy
+
+We prove the following properties:
+
+1. $H(S) \geq  0$ (non-negative)
+
+2. $H(S)$ is maximum when all $n$ messages have equal probability $\frac{1}{n}$.
+The maximum value is $max H(S) = log(n)$.
+
+3. *Diversfication* of the source always increases the entropy
 
 
 ### Example - Game
 Game: I think of a number between 1 and 8. You have to guess it by asking
 yes/no questions.
 
-* How much indetermination does the problem have?
+* How much uncertainty does the problem have?
 * How is the best way to ask questions? Why?
 * What if the questions are not asked in the best way?
 * On average, what is the number of questions required to find the number?
 
 ### Example - Game v2
-Suppose I choose a number according to the following distribution: ...
+Suppose I choose a number according to the following distribution:
+$$\sIV{S}{\fIoII}{\fIoIV}{\fIoVIII}{\fIoVIII}$$
 
-* On average, what is the number of questions required to find the number?
+* On average, what is the number of questions required to find the number? 
+* What questions would you ask?
+
+What if the distribution is:
+$$\sIV{S}{0.14}{0.29}{0.4}{0.17}$$
+
+In general:
 
 * What distribution makes guessing the number the most difficult?
 * What distribution makes guessing the number the easiest?
 
-### Entropy of a discrete memoryless source
+### Information flow of a DMS
 
-### Properties of entropy
+Suppose that message $s_i$ takes time $t_i$ to be transmitted via some channel.
 
-1. It 
+Definition: the information flow of a DMS $S$ is **the average information transmitted
+per unit of time**:
+$$H_\tau(S) = \frac{H(S)}{\overline{t}}$$
 
-2. is 
+where $\overline{t}$ is the average duration of transmitting a message:
+$$H(S) = \sum_{i} p_i t_i $$
 
-3. cool
+### Extended DMS
+
+Definition: the $n$-th order extension of a DMS $S$, $S^n$ is the source with
+messages has as messages all the combinations of $n$ messages of $S$:
+$$\sigma_i = \underbrace{s_j s_k ... s_l}_{n}$$
+
+* If $S$ has $k$ messages, $S^n$ has $k^n$ messages
+* Since $S$ is DMS $$p(\sigma_i) = p(s_j) \cdot p(s_k) \cdot ... \cdot p(s_l)$$
+
+### Extended DMS - Example
+
+Examples:
+$$\sII{S}{\fIoIV}{\frac{3}{4}}$$
+$$\snIV{S^2}{\sigma_1 = s_1 s_1}{\frac{1}{16}}{\sigma_2 = s_1 s_2}{\frac{3}{16}}{\sigma_3 = s_2 s_1}{\frac{3}{16}}{\sigma_4 = s_2 s_2}{\frac{9}{16}}$$
+$$S^3: \left( \begin{matrix} s_1 s_1 s_1 & s_1 s_1 s_2 & s_1 s_2 s_1 & s_1 s_2 s_2 & s_2 s_1 s_1 & s_2 s_1 s_2 & s_2 s_2 s_1 & s_2 s_2 s_2 \\ ... & ... & ... & ... & ... & ... & ... & ... \end{matrix} \right)$$
 
 
-### Sources with memory
+### Extended DMS - Another example
+Long sequence of binary messages:
+$$0 1 0 0 1 1 0 0 1 1 1  0 0 1 0 1 0 0 ...$$
+
+Can be grouped in bits, half-bytes, bytes, 16-bit words, 32-bit long words, and so on.
+
+
+### Property of DMS
+
+We prove the following:
+
+Theorem: The entropy of a $n$-th order extension is $n$ times larger than the entropy of the original DMS
+$$H(S^n) = n H(S)$$
+
+Interpretation: grouping messages from a long sequence in blocks of $n$ does not change total information
+(e.g. groups of 8 bits = 1 byte)
+
+
+## Sources with memory
 
 A text can be considered as a sequence of symbols drawn from a memoryless source.
 
