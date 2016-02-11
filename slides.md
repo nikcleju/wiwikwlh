@@ -277,8 +277,61 @@ Interpretation: grouping messages from a long sequence in blocks of $n$ does not
 
 ## Sources with memory
 
-A text can be considered as a sequence of symbols drawn from a memoryless source.
+### An example
 
-The distribution (frequencies) of letters in the Romanian language is close to:
+The distribution (frequencies) of letters in English:
 
+![](img/EngLetterProb.jpg){width=30%}\ 
 
+Text from a memoryless source with these probabilities:
+
+![](img/EnglishZeroOrder.png){width=50%}\
+
+*(taken from Elements of Information Theory, Cover, Thomas)*
+
+What's wrong? **Memoryless**
+
+### Sources with memory
+
+Definition: A source has memory of order $m$ if the probability
+of a message depends on the last $m$ messages.
+
+The last $m$ messages = the **state** of the source ($S_i$).
+
+A source with $n$ messages and memory $m$ => $n^m$ states in all.
+
+For every state, messages can have a different set of
+probabilities.
+
+Also known as Markov sources.
+
+### Transitions
+
+When a new message is provided, the source **transitions** to a
+new state:
+$$\underbrace{s_i s_j s_k}_{\text{old state}} s_l$$
+$$s_i \underbrace{s_j s_k s_l}_{\text{new state}}$$
+
+The message probabilities = the probabilities of transitions from
+state $S_a$ to $S_b$
+
+### Transition matrix
+The transition probabilities are organized in a **transition
+matrix** $[T]$
+$$[T] = 
+\begin{bmatrix}
+p_{11} & p_{12} & ... & p_{1N} \\ 
+p_{21} & p_{22} & ... & p_{2N} \\ 
+... & ... & ... & ... \\ 
+p_{N1} & p_{N2} & ... & p_{NN} \\ 
+\end{bmatrix}$$
+
+$p_{ij}$ is the transition probability from state $S_i$ to state
+$S_j$
+
+$N$ is the total number of states
+
+### Graphical representation
+Example here
+
+### 

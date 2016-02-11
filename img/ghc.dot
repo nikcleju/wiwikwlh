@@ -1,6 +1,0 @@
-digraph G {
-  rankdir=TD
-  node [shape=box]
-  Parse -> Rename -> Typecheck -> Desugar -> Simplify -> Stg -> Codegen -> Cmm -> "Native Code"
-}
-
