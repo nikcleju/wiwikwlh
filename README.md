@@ -1,5 +1,6 @@
 
 Lecture notes --- Information Theory
+-------
 
 Template based on http://dev.stephendiehl.com/hask/
 
