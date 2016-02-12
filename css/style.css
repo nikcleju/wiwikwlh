@@ -19,9 +19,21 @@ h1, h2, h3, h4, h5 {
   line-height: 1.1;
 }
 
+/* Nic */
 h3 {
-text-decoration: underline
+/*text-decoration: underline;*/
+padding-left: 20px;
+border-style: solid;
+border-width: 3px;
+border-color: black;
 }
+
+/* Nic */
+/*
+h3:before {
+content: "### "
+}
+* */
 
 /* Nic */
 .slides p , .slides ul , .slides ol {
@@ -61,7 +73,7 @@ a {
 
 .toc a { 
   text-decoration: none;
-  font-size: 8pt;
+  font-size: 9pt;
   line-height: 0.9;
 }
 
@@ -232,6 +244,7 @@ ul.sections > li > div {
 
 .toc ul ul {
     padding-left: 0.8em;
+    padding-right: 0.8em;
 }
 
 .toc > ul {
@@ -240,10 +253,15 @@ ul.sections > li > div {
 }
 
 .toc li {
-    line-height: 15px !important;
+    line-height: 20px !important; /*Nic changed*/
     list-style-type: none;
 }
 
+/*Nic*/
+.toc li {
+   padding-left: 0.5em;
+   text-indent: -0.5em;
+}
 /*----------------------  (> 481px) ---------------------*/
 @media only screen and (min-width: 481px) {
 }

@@ -47,24 +47,23 @@ The teaching activities consist of:
 
 Course structure
 ======
-1. Pam
-2. Pam
+1. Chapter I:   Discrete Information Sources
+2. Chapter II:  Discrete Transmission Channels
+3. Chapter III: Source Coding
+4. Chapter IV:  Channel Coding 
 
 Bibliography
 ======
 
-1. Pam Pam
-1. HamHam
-1. Yoyo
+1. ** *Elements of Information Theory*, Valeriu Munteanu, Daniela Tarniceriu, Ed. CERMI 2007**
+1. *Elements of Information Theory*, Thomas M. Cover, Joy A. Thomas, 2nd Edition, Wiley 2006
+1. *Information and Coding Theory*, Gareth A. Jones, J. Mary Jones, Springer 2000
+1. *Transmisia si codarea informatiei*, lectures at ETTI (Romanian)
 
-Laboratory
-======
+# Slides download [pdf]
+Download [here](slides.pdf)
 
-Ideas
-------
 
-* Implement a speed testing game in Simulink: 4 leds randmly lighting up, student
-must press button for the correct led. The higher the entropy, the larger average time and errors
 
 
 
