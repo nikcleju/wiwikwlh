@@ -195,7 +195,7 @@ from source S
 
 ### Properties of entropy
 
-We prove the following properties:
+We prove the following **properties of entropy**:
 
 1. $H(S) \geq  0$ (non-negative)
 
@@ -285,7 +285,7 @@ The distribution (frequencies) of letters in English:
 
 Text from a memoryless source with these probabilities:
 
-![](img/EnglishZeroOrder.png){width=50%}\
+![](img/EnglishFirstOrder.png){width=50%}\
 
 *(taken from Elements of Information Theory, Cover, Thomas)*
 
@@ -301,9 +301,21 @@ The last $m$ messages = the **state** of the source ($S_i$).
 A source with $n$ messages and memory $m$ => $n^m$ states in all.
 
 For every state, messages can have a different set of
-probabilities.
+probabilities. Notation: $p(s_i | S_k)$ = *"probability of $s_i$ in state $S_k$"*.
 
-Also known as Markov sources.
+Also known as *Markov sources*.
+
+### Example
+A source with $n=4$ messages and memory $m=1$
+
+* if last message was $s_1$, choose next message with distribution
+$$\sIV{S_1}{0.4}{0.3}{0.2}{0.1}$$
+* if last message was $s_2$, choose next message with distribution
+$$\sIV{S_2}{0.33}{0.37}{0.15}{0.15}$$
+* if last message was $s_3$, choose next message with distribution
+$$\sIV{S_3}{0.2}{0.35}{0.41}{0.04}$$
+* if last message was $s_4$, choose next message with distribution
+$$\sIV{S_4}{0.1}{0.2}{0.3}{0.4}$$
 
 ### Transitions
 
@@ -334,4 +346,92 @@ $N$ is the total number of states
 ### Graphical representation
 Example here
 
-### 
+### Entropy of sources with memory
+Each state $S_k$ has a different distribution --> each state has a different entropy $H(S_k)$
+$$H(S_k) = - \sum_i p(s_i | S_k) \cdot log(p(s_i | S_k))$$
+
+Global entropy = average entropy
+$$H(S) = \sum_k p_k H(S_k)$$
+where $p_k$ = probability that the source is in state $S_i$
+(i.e. after a very long sequence of messages, how many times the source was in state $S_k$)
+
+### Ergodic sources
+
+Let $p_i^{(t)} =$ the probability that source $S$ is in state $S_i$ at time $t$.
+
+In what state will it be at time $t+1$? (after one more message) (probabilities)
+
+$[p_1^{(t)}, p_2^{(t)}, ... p_N^{(t)}] \cdot [T] = [p_1^{(t+1)}, p_2^{(t+1)}, ... p_N^{(t+1)}]$
+
+After one more message:
+
+$[p_1^{(t)}, p_2^{(t)}, ... p_N^{(t)}] \cdot [T] \cdot [T] = [p_1^{(t+2)}, p_2^{(t+2)}, ... p_N^{(t+2)}]$
+
+In general, after $n$ messages the probabilities that the source is in a certain state are:
+
+$[p_1^{(0)}, p_2^{(0)}, ... p_N^{(0)}] \cdot [T]^{n} = [p_1^{(n)}, p_2^{(n)}, ... p_N^{(n)}]$
+
+### Ergodicity
+
+A source is called **ergodic** if every state can be reached from every state, in a finite number of steps.
+
+**Property of ergodic sources:** 
+After many messages, the probabilities of the states *become stationary* (converge to some fixed values), irrespective of the initial probabilities.
+$$\lim_{n \to \infty} [p_1^{(n)}, p_2^{(n)}, ... p_N^{(n)}] = [p_1, p_2, ... p_N]$$
+
+### Finding the stationary probabilties
+
+After $n$ messages and after $n+1$ messages, the probabilties are the same:
+
+$[p_1, p_2, ... p_N] \cdot [T] = [p_1, p_2, ... p_N]$
+
+Also $p_1 + p_2 + ... p_N = 1$.
+
+=> solve system of equations, find values.
+
+### Entropy of ergodic sources with memory 
+
+The entropy of an ergodic source with memory is
+$$H(S) = \sum_k p_k H(S_k) = - \sum_k p_k \sum_i p(s_i | S_k) \cdot log(p(s_i | S_k)$$
+
+### Example English text as sources with memory
+
+Memoryless source, equal probabilities:
+![](img/EnglishZeroOrder.png){width=50%}\
+
+Memoryless source, probabilities of each letter as in English:
+![](img/EnglishFirstOrder.png){width=50%}\
+
+Source with memory $m=1$, frequency of pairs as in English:
+![](img/EnglishSecondOrder.png){width=50%}\
+
+
+Source with memory $m=2$, frequency of triplets as in English:
+![](img/EnglishThirdOrder.png){width=50%}\
+
+Source with memory $m=3$, frequency of quadruplets as in English:
+![](img/EnglishFourthOrder.png){width=50%}\
+
+
+### Chapter summary
+
+* Information of a message: $i(s_i) = -log_2(p(s_i))$
+
+* Entropy of a memoryless source: $H(S) = \sum_{k} p_k i(s_k) = -\sum_{k} p_k log_2(p_k)$
+
+* Properties of entropy:
+    
+    1. $H(S) \geq  0$
+
+    2. Is maximum when all messages have equal probability ($H_{max}(S) = log(n)$)
+
+    3. *Diversfication* of the source always increases the entropy
+
+* Sources with memory: definition, transitions
+
+* Stationary probabilities of ergodic sources with memory:
+$[p_1, p_2, ... p_N] \cdot [T] = [p_1, p_2, ... p_N]$, $\sum_i p_i = 1$.
+
+* Entropy of sources with memory:
+$$H(S) = \sum_k p_k H(S_k) = - \sum_k p_k \sum_i p(s_i | S_k) \cdot log(p(s_i | S_k)$$
+
