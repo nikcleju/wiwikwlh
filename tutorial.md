@@ -50,15 +50,11 @@ Course structure
 Bibliography
 ======
 
-1. ** *Elements of Information Theory*, Valeriu Munteanu, Daniela Tarniceriu, Ed. CERMI 2007**
+1. ***Elements of Information Theory*, Valeriu Munteanu, Daniela Tarniceriu, Ed. CERMI 2007**
 1. *Elements of Information Theory*, Thomas M. Cover, Joy A. Thomas, 2nd Edition, Wiley 2006
 1. *Information and Coding Theory*, Gareth A. Jones, J. Mary Jones, Springer 2000
 1. *Transmisia si codarea informatiei*, lectures at ETTI (Romanian)
 
 # Slides download [pdf]
 Download [here](slides.pdf)
-
-
-
-
 

@@ -41,11 +41,9 @@ clean:
 	-rm $(CHAPTERS) $(HTML)
 
 slides: 
-	< slides.md \
-	$(PANDOC) -s -f $(IFORMAT)+latex_macros -t beamer -o slides.pdf --slide-level 3 --include-in-header macros.md
+	$(PANDOC) -s -f $(IFORMAT)+latex_macros -t beamer -o slides.pdf --slide-level 3 --include-in-header macros.md  slides_header.md slides.md
 
 slidestex: 
-	< slides.md \
-	$(PANDOC) -s -f $(IFORMAT)+latex_macros -t beamer -o slides.tex --slide-level 3 --include-in-header macros.md
+	$(PANDOC) -s -f $(IFORMAT)+latex_macros -t beamer -o slides.tex --slide-level 3 --include-in-header slides_header.md --include-in-header macros.md  slides_header.md slides.md
 
 	

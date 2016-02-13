@@ -14,63 +14,6 @@
 \newcommand{\fIoVIII}{\frac{1}{8}}
 \addtobeamertemplate{block begin}{}{\setlength{\parskip}{35pt plus 1pt minus 1pt}}
 \addtobeamertemplate{block begin}{}{\setlength{\parskip}{35pt plus 1pt minus 1pt}}
-
-%\let\svpar\par
-%\let\svitemize\itemize
-%\let\svenditemize\enditemize
-%\let\svitem\item
-%\def\newpar{\def\par{\svpar\vfill}}
-%\def\newitem{\def\item{\vfill\svitem}}
-%\let\svcenter\center
-%\let\svendcenter\endcenter
-%\let\svcolumn\column
-%\let\svendcolumn\endcolumn
-%\newlength\columnskip
-%\columnskip 0pt
-%\def\newcolumn{
-%  \renewenvironment{column}[2]
-%    {\svcolumn{##1}\setlength{\parskip}{\columnskip}##2}
-%    {\svendcolumn\vspace{\columnskip}}}
-%
-%\newpar\def\item{\svitem\newitem}
-%\renewenvironment{itemize}{\svitemize}{\svenditemize\newpar\par}
-%\renewenvironment{center}{\svcenter\newpar}{\svendcenter\newpar}
-%
-%\def\itemsymbol{$\blacktriangleright$}
-%\let\svpar\par
-%\let\svitemize\itemize
-%\let\svenditemize\enditemize
-%\let\svitem\item
-%\let\svcenter\center
-%\let\svendcenter\endcenter
-%\let\svcolumn\column
-%\let\svendcolumn\endcolumn
-%\def\newitem{\renewcommand\item[1][\itemsymbol]{\vfill\svitem[##1]}}%
-%\def\newpar{\def\par{\svpar\vfill}}%
-%\newcommand\stretchon{%
-%  \newpar%
-%  \renewcommand\item[1][\itemsymbol]{\svitem[##1]\newitem}%
-%  \renewenvironment{itemize}%
-%    {\svitemize}{\svenditemize\newpar\par}%
-%  \renewenvironment{center}%
-%    {\svcenter\newpar}{\svendcenter\newpar}%
-%  \renewenvironment{column}[2]%
-%    {\svcolumn{##1}\setlength{\parskip}{\columnskip}##2}%
-%    {\svendcolumn\vspace{\columnskip}}%
-%}
-%\newcommand\stretchoff{%
-%  \let\par\svpar%
-%  \let\item\svitem%
-%  \let\itemize\svitemize%
-%  \let\enditemize\svenditemize%
-%  \let\center\svcenter%
-%  \let\endcenter\svendcenter%
-%  \let\column\svcolumn%
-%  \let\endcolumn\svendcolumn%
-%}
-%\newlength\columnskip
-%\columnskip 0pt
-%\stretchoff
   
 \usetheme{default}
 \usecolortheme{whale}
@@ -78,7 +21,4 @@
 \setbeamertemplate{enumerate items}[default]
 
 \setbeamersize{text margin left=15pt}
-
-  
-
 
