@@ -39,11 +39,6 @@ The teaching activities consist of:
 
 * 14 weeks of lectures (3h each)
 * 14 weeks of laboratories (2h each)
-    * 5 laboratories
-    * 7 seminars
-    * 1 *recuperari*
-    * 1 test 
-
 
 Course structure
 ======

@@ -14,22 +14,19 @@ Final grade = 0.75 Exam + 0.25 Lab
 ### Time schedule
 * 14 weeks of lectures (3h each)
 * 14 weeks of laboratories (2h each)
-    * 5 laboratories
-    * 7 seminars
-    * 1 recuperari
-    * 1 test 
-
 
 ### Course structure
-1. Introduction to probabilities
-2. Pam
-
+1. Chapter I:   Discrete Information Sources
+2. Chapter II:  Discrete Transmission Channels
+3. Chapter III: Source Coding
+4. Chapter IV:  Channel Coding 
 
 ### Bibliography
 
-1. Pam Pam
-1. HamHam
-1. Yoyo
+1. ** *Elements of Information Theory*, Valeriu Munteanu, Daniela Tarniceriu, Ed. CERMI 2007**
+1. *Elements of Information Theory*, Thomas M. Cover, Joy A. Thomas, 2nd Edition, Wiley 2006
+1. *Information and Coding Theory*, Gareth A. Jones, J. Mary Jones, Springer 2000
+1. *Transmisia si codarea informatiei*, lectures at ETTI (Romanian)
 
 
 ## Introduction to probabilities
@@ -52,7 +49,8 @@ Final grade = 0.75 Exam + 0.25 Lab
 
 
 ### Block diagram of a communication system
- de pus poza
+
+![Block diagram of a communication system](img/CommBlockDiagram.png){width=50%}
 
 
 ### What is information?
