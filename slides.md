@@ -434,3 +434,135 @@ $$H(S) = \sum_k p_k H(S_k) = - \sum_k p_k \sum_i p(s_i | S_k) \cdot log(p(s_i | 
 ## Chapter II: Discrete Transmission Channels
 
 ### What are they?
+
+![Communication system](img/CommBlockDiagram.png){width=40%}
+
+* A system of two related random variables
+
+* Input random variable $X = {x_1, x_2, ...}$, output random variable $Y = {y_1, y_2, ...}$
+
+* $X$ and $Y$ are *related*, but still *random* (usually because of *noise*)
+
+### Nomenclature
+
+* Discrete: the input alhabet and the output alphabet are finite
+* Memoryless: the output symbol depends only on the current input symbol
+* Stationary: the noise arising on the channel is time invariant (i.e.
+its statistics do not vary in time)
+
+### Systems of two random variables
+
+* Two random variables: $X = {x_1, x_2, ...}$, $Y = {y_1, y_2, ...}$.
+* Example: throw a dice (X) and a coin (Y) simultaneously
+* How to describe this system?
+
+A single joint information source:
+
+$$\snIV{X \cap Y}{x_1 \cap y_1}{p(x_1 \cap y_1)}{x_1 \cap y_2}{p(x_1 \cap y_2)}{...}{...}{x_i \cap y_j}{p(x_i \cap y_j)}$$
+
+Arrange in a nicer form (table):
+
+              $y_1$              $y_2$    $y_3$ 
+-----------   -----              -----    -----
+$x_1$         ...                ...      ...
+$x_2$         ...                ...      ...
+$x_3$         ...                ...      ...
+
+* Elements of the table: $p(x_i \cap y_j)$
+
+### Joint probability matrix
+
+The table constitutes the **joint probability matrix**:
+
+$$ P(X,Y) = 
+\begin{bmatrix}
+p(x_1 \cap y_1) & p(x_1 \cap y_2) & \cdots & p(x_1 \cap y_M) \\ 
+p(x_2 \cap y_1) & p(x_2 \cap y_2) & \cdots & p(x_2 \cap y_M) \\ 
+\vdots & \vdots & \cdots & \vdots \\
+p(x_N \cap y_1) & p(x_N \cap y_2) & \cdots & p(x_N \cap y_M) \\ 
+\end{bmatrix} $$
+
+$$\sum_i \sum_j p(x_i \cap y_j) = 1$$
+
+* This matrix completely defines the two-variable system 
+* This matrix completely defines the communication process
+
+### Joint entropy
+
+* The distribution $X \cap Y$ determines the **joint entropy**:
+$$H(X,Y) = - \sum_i \sum_j p(x_i \cap y_j) \cdot log(p(x_i \cap y_j))$$
+
+* This is the global entropy of the system (knowing the input and the output)
+
+
+### Marginal distributions
+
+* $p(x_i) = \sum_j p(x_i \cap y_j)$ = sum of row $i$ from P(X,Y)
+* $p(y_j) = \sum_i p(x_i \cap y_j)$ = sum of column $j$ from P(X,Y)
+* The distributions $p(x)$ and $p(y)$ are called **marginal distributions**
+("summed along the margins")
+
+### Examples [marginal distributions not enough]
+
+* Example 1:
+
+$$P(X,Y) = 
+\begin{bmatrix}
+0.3 & 0 \\ 
+0 & 0.7 &
+\end{bmatrix}$$
+
+* Example 2:
+
+$$P(X,Y) = 
+\begin{bmatrix}
+0.15 & 15 \\ 
+0.15 & 0.55 
+\end{bmatrix}$$
+
+* Both have identical $p(x)$ and $p(y)$, but are completely different
+* Which one is better for a transmission?
+* Marginal distribution are useful, but not enough. Essential is the 
+*relation* between X and Y.
+
+### Bayes formula
+
+$$p(A \cap B) = p(A) \cdot p(B | A)$$
+
+$$p(B | A) = \frac{p(A \cap B)}{p(A)}$$
+
+* "The conditional probability of B **given A** " (i.e. given that event A happened)
+
+* Examples...
+
+* Independence: 
+$$p(A \cap B) = p(A) p(B)$$
+$$p(B \cap A) = p(B)$$
+
+### Channel matrix
+
+Noise (or channel) matrix:
+
+$$P(Y|X) =
+\begin{bmatrix}
+p(y_1 | x_1) & p(y_2 | x_1) & \cdots & p(y_M | x_1) \\ 
+p(y_1 | x_2) & p(y_2 | x_2) & \cdots & p(y_M | x_2) \\ 
+\vdots & \vdots & \cdots & \vdots \\
+p(y_1 | x_N) & p(y_2 | x_N) & \cdots & p(y_M | x_N) \\
+\end{bmatrix} $$
+
+* Defines the probability of an output **given an input**
+* Each row = a separate distribution ...
+
+### Three examples 
+
+Three examples to help you remember conditional probabilities
+
+* Play and win the lottery
+
+* Gambler's paradox
+
+* CNN: [Crippled cruise ship returns; passengers happy to be back](http://edition.cnn.com/2013/02/14/travel/cruise-ship-fire/)
+
+
+
