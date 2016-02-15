@@ -6,7 +6,7 @@
 Professors:
 
 * Lectures: Nicolae Cleju (nikcleju@etti.tuiasi.ro)
-* Laboratories: Daniel Matasaru (..@etti.tuiasi.ro)
+* Laboratories: Daniel Matasaru (dmatasaru@etti.tuiasi.ro)
 
 ### Grades
 Final grade = 0.75 Exam + 0.25 Lab
@@ -14,6 +14,7 @@ Final grade = 0.75 Exam + 0.25 Lab
 ### Time schedule
 * 14 weeks of lectures (3h each)
 * 14 weeks of laboratories (2h each)
+* Office hours: by appointment
 
 ### Course structure
 1. Chapter I:   Discrete Information Sources
@@ -41,8 +42,14 @@ Final grade = 0.75 Exam + 0.25 Lab
 
 * Alphabet
 
+* Logarithm function
+
+* Exponential function
+
+* Average of some values
+
 ### Basic properties
-* Two independent events: $$P(A \cap B) = P(A) \cdot P(B)$$
+* Two independent events: $$p(A \cap B) = p(A) \cdot p(B)$$
 
 
 ## Chapter I: Discrete information sources
@@ -109,7 +116,7 @@ $$\sIII{S}{\fIoII}{\fIoIV}{\fIoIV}$$
 
 ### Examples
 * A coin is a discrete memoryless source (DMS) with two messages:
-$$\snII{S}{coin \_ head}{\fIoII}{coin \_ tail}{\fIoII}$$
+$$\snII{S}{heads}{\fIoII}{tails}{\fIoII}$$
 
 * A dice is a discrete memoryless source (DMS) with six messages:
 $$\sVI{S}{\fIoVI}{\fIoVI}{\fIoVI}{\fIoVI}{\fIoVI}{\fIoVI}$$
@@ -201,6 +208,15 @@ The maximum value is $max H(S) = log(n)$.
 
 3. *Diversfication* of the source always increases the entropy
 
+### The entropy of a binary source
+
+* Consider a general DMS with two messages:
+$$\sII{S}{p}{1-p}$$
+
+* It's entropy is:
+$$H(S) = -p \cdot log(p) - (1-p) \cdot log(1-p)$$
+
+* Graphical plot...
 
 ### Example - Game
 Game: I think of a number between 1 and 8. You have to guess it by asking
@@ -552,7 +568,26 @@ p(y_1 | x_N) & p(y_2 | x_N) & \cdots & p(y_M | x_N) \\
 \end{bmatrix} $$
 
 * Defines the probability of an output **given an input**
-* Each row = a separate distribution ...
+* Each row  = a separate distribution that indicates the probability of the outputs
+**if the input is $x_i$**)
+
+* The sum of each row is 1 (there must be some output if the input is $x_i$
+
+### Relation of channel matrix and joint probability matrix
+
+* $P(Y|X)$ is obtained from $P(X,Y)$ by dividing its row to its sum ($p(x_i)$)
+* This is known as *normalization* of rows
+* $P(X,Y)$ can be obtained back from $P(X,Y)$ by multiplying each row with $p(x_i)$
+* $P(X,Y)$ contains less information than $P(X,Y)$
+
+### Definition of a discrete transmission channel
+
+**Definition**: A diecrete transmission channel is defined by three items:
+
+ 1. The input alphabet $X = \{ x_1, x_2, \ldots \}$
+ 2. The output alphabet $Y = \{y_1, y_2, \ldots \}$
+ 3. The noise (channel) matrix $P(Y|X)$ which defines the conditional probabilities of 
+ the outputs $y_j$ for every possible input $x_i$
 
 ### Three examples 
 
