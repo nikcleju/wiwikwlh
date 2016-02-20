@@ -582,7 +582,7 @@ p(y_1 | x_N) & p(y_2 | x_N) & \cdots & p(y_M | x_N) \\
 
 ### Definition of a discrete transmission channel
 
-**Definition**: A diecrete transmission channel is defined by three items:
+**Definition**: A discrete transmission channel is defined by three items:
 
  1. The input alphabet $X = \{ x_1, x_2, \ldots \}$
  2. The output alphabet $Y = \{y_1, y_2, \ldots \}$
@@ -599,5 +599,8 @@ Three examples to help you remember conditional probabilities
 
 * CNN: [Crippled cruise ship returns; passengers happy to be back](http://edition.cnn.com/2013/02/14/travel/cruise-ship-fire/)
 
+### Conditional entropy H(Y|X)
 
-
+* Since each row is a distribution, each row has an entropy
+* Entropy of row $x_i$:
+$$H(Y|x_i) = -\sum_j p(y_j|x_k) log(p(y_j|x_k))$$
