@@ -26,8 +26,8 @@ Introduction
 
 The teaching activities are performed by:
 
-* Lectures: Nicolae Cleju (nikcleju@etti.tuiasi.ro)
-* Laboratory: Daniel Matasaru (dmatasaru@etti.tuiasi.ro)
+* Lectures: Nicolae Cleju
+* Laboratory: Daniel Matasaru
 
 Office hours: TBD
 
@@ -57,4 +57,8 @@ Bibliography
 
 # Slides download [pdf]
 Download [here](slides.pdf)
+
+# Laboratory
+1. Linear Filters ([pdf](labs/L01_IT_LinearFilters.pdf))
+2. Pseudo-random Binary Sequences Generator ([pdf](labs/L02_IT_PseudorandomBinarySequenceGenerator.pdf))
 
