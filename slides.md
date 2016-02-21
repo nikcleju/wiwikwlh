@@ -5,8 +5,8 @@
 ### Organization
 Professors:
 
-* Lectures: Nicolae Cleju (nikcleju@etti.tuiasi.ro)
-* Laboratories: Daniel Matasaru (dmatasaru@etti.tuiasi.ro)
+* Lectures: Nicolae Cleju
+* Laboratories: Daniel Matasaru
 
 ### Grades
 Final grade = 0.75 Exam + 0.25 Lab
@@ -575,10 +575,10 @@ p(y_1 | x_N) & p(y_2 | x_N) & \cdots & p(y_M | x_N) \\
 
 ### Relation of channel matrix and joint probability matrix
 
-* $P(Y|X)$ is obtained from $P(X,Y)$ by dividing its row to its sum ($p(x_i)$)
+* $P(Y|X)$ is obtained from $P(X,Y)$ by dividing every row to its sum ($p(x_i)$)
 * This is known as *normalization* of rows
-* $P(X,Y)$ can be obtained back from $P(X,Y)$ by multiplying each row with $p(x_i)$
-* $P(X,Y)$ contains less information than $P(X,Y)$
+* $P(X,Y)$ can be obtained back from $P(Y|X)$ by multiplying each row with $p(x_i)$
+* $P(Y|X)$ contains less information than $P(X,Y)$
 
 ### Definition of a discrete transmission channel
 
@@ -588,6 +588,10 @@ p(y_1 | x_N) & p(y_2 | x_N) & \cdots & p(y_M | x_N) \\
  2. The output alphabet $Y = \{y_1, y_2, \ldots \}$
  3. The noise (channel) matrix $P(Y|X)$ which defines the conditional probabilities of 
  the outputs $y_j$ for every possible input $x_i$
+
+### Graphical representation of a channel
+
+* Nice picture with arrows :)
 
 ### Three examples 
 
@@ -603,4 +607,123 @@ Three examples to help you remember conditional probabilities
 
 * Since each row is a distribution, each row has an entropy
 * Entropy of row $x_i$:
-$$H(Y|x_i) = -\sum_j p(y_j|x_k) log(p(y_j|x_k))$$
+$$H(Y|x_i) = -\sum_j p(y_j|x_i) log(p(y_j|x_i))$$
+* *"The uncertainty of the output message when the input message is $x_i$"*
+* Example: lottery
+
+### Conditional entropy H(Y|X)
+
+* A different $H(Y|x_i)$ for every $x_i$
+* Compute the average over all $x_i$:
+$$\begin{aligned}
+H(Y|X) &= \sum_i p(x_i) H(Y|x_i) \\
+       &= -\sum_i \sum_j p(x_i) p(y_j|x_i) log(p(y_j|x_i)) \\
+       &= -\sum_i \sum_j p(x_i \cap y_j) log(p(y_j|x_i))
+\end{aligned}$$
+* **"The uncertainty of the output message when we know the input message"** (any input, in general)
+
+### Equivocation matrix
+
+Equivocation matrix:
+
+$$P(X|Y) =
+\begin{bmatrix}
+p(x_1 | y_1) & p(x_1 | y_2) & \cdots & p(x_1 | y_M) \\ 
+p(x_2 | y_1) & p(x_2 | y_2) & \cdots & p(x_2 | y_M) \\ 
+\vdots & \vdots & \cdots & \vdots \\
+p(x_N | y_1) & p(x_N | y_2) & \cdots & p(x_N | y_M) \\
+\end{bmatrix}$$
+
+* Defines the probability of an input **given an output**
+* Each column  = a separate distribution that indicates the probability of the inputs
+**if the output is $y_j$**)
+
+* The sum of each column is 1 (there must be some input if the output is $y_j$
+
+### Relation of equivocation matrix and joint probability matrix
+
+* $P(X|Y)$ is obtained from $P(X,Y)$ by dividing every column to its sum ($p(y_j)$)
+* This is known as *normalization* of columns
+* $P(X,Y)$ can be obtained back from $P(X|Y)$ by multiplying each column with $p(y_j)$
+* $P(X|Y)$ contains less information than $P(X,Y)$
+
+### Conditional entropy H(X|Y) (equivocation)
+
+* Since each column is a distribution, each column has an entropy
+* Entropy of column $y_j$:
+$$H(X|y_j) = -\sum_i p(x_i|y_j) log(p(x_i|y_j))$$
+* *"The uncertainty of the input message when the output message is $y_j$"*
+* Example: ...
+
+### Conditional entropy H(X|Y) (equivocation)
+
+* A different $H(X|y_j)$ for every $y_j$
+* Compute the average over all $y_j$:
+$$\begin{aligned}
+H(X|Y) &= \sum_j p(y_j) H(X|y_j) \\
+       &= -\sum_i \sum_j p(y_j) p(x_i|y_j) log(p(x_i|y_j)) \\
+       &= -\sum_i \sum_j p(x_i cap y_j) log(p(x_i|y_j))
+\end{aligned}$$
+* **"The uncertainty of the input message when we know the output message"** (any output, in general)
+* Should be small for a good communication
+
+### Properties of conditional entropies
+
+For a general system with two random variables $X$ and $Y$:
+
+* Conditioning always reduces entropy:
+$$H(X|Y) \leq H(X)$$
+$$H(Y|X) \leq H(Y)$$
+(knowing something cannot harm)
+
+* If the variables are independent:
+$$H(X|Y) = H(X)$$
+$$H(Y|X) = H(Y)$$
+(knowing the second variable does not help at all)
+
+### Mutual information I(X,Y)
+
+* Mutual information I(X,Y) = the average information that one variable has about the other
+* Mutual information I(X,Y) = the average information that is transmitted on the channel
+* Consider a communication channel with $X$ as input and $Y$ as output:
+    * We are the receiver and we want to find out the $X$
+    * When we don't know the output: H(X)
+    * When we know the output: H(X|Y)
+* How much information was transmitted?
+    * Reduction of uncertainty: 
+    $$I(X,Y) = H(X) - H(X|Y)$$
+    
+### Mutual information I(X,Y)
+$$\begin{aligned}
+I(X,Y) &= H(X) - H(X|Y) \\
+       &= -\sum_i p(x_i) log(p(x_i)) + \sum_i \sum_j p(x_i \cap y_j) log(p(x_i|y_j)) \\
+       &= -\sum_i \sum_j p(x_i \cap y_j) log(p(x_i)) + \sum_i \sum_j p(x_i \cap y_j) log(p(x_i|y_j)) \\
+       &= \sum_i \sum_j p(x_i \cap y_j) log(\frac{p(x_i|y_j)}{p(x_i)}) \\
+       &= \sum_i \sum_j p(x_i \cap y_j) log(\frac{p(x_i \cap y_j)}{p(x_i)p(y_j)}) \\
+\end{aligned}$$
+    
+### Properties of mutual information
+Mutual information $I(X,Y)$ is:
+
+* a special case of the Kullback–Leibler distance (relative entropy distance) of two distributions:
+$$D_{KL}(P,Q) = \sum_i P(i) log(\frac{P(i)}{Q(i)})$$
+$$I(X,Y) = D(p(x_i \cap y_j), p(x_i) \cdot p(y_j))$$
+
+* commutative: $I(X,Y) = I(Y,X)$
+* non-negative: $I(X,Y) \geq 0$
+
+### Relations between the informational measures
+
+* Nice picture with two circles :)
+* All six: $H(X)$, $H(Y)$, $H(X,Y)$, $H(X|Y)$, $H(Y|X)$, $I(X,Y)$
+* All relations on the picture are valid relations:
+
+$$H(X,Y) = H(X) + H(Y) - I(X,Y)$$
+$$H(X,Y) = H(X) + H(Y|X) = H(Y) + H(X|Y)$$
+$$I(X,Y) = H(X) - H(X|Y) = H(Y) - H(Y|X)$$
+...
+
+* If know three, can find the other three
+* Simplest to find first H(X), H(Y), H(X,Y) ---> then find others
+
+### Types of communication channels

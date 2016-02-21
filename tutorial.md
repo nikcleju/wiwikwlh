@@ -8,7 +8,7 @@
 Information Theory 2015-2016
 ======
 
-Nicolae Cleju, <!--(<a class="author" href="https://twitter.com/smdiehl">@smdiehl</a> )-->
+Nicolae Cleju <!--(<a class="author" href="https://twitter.com/smdiehl">@smdiehl</a> )-->
 
 Faculty of Electronics, Telecommunications and Information Technology,
 
@@ -19,6 +19,8 @@ Theory taking place during second semester 2015-2016.
 
 Feel free to contact me for any questions, problems or comments regarding this material
 or anything else discussed in class.
+
+The template of this webpage is by [Stephen Diehl](http://dev.stephendiehl.com/hask/).
 
 
 Introduction
