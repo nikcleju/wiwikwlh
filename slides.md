@@ -459,6 +459,14 @@ $$H(S) = \sum_k p_k H(S_k) = - \sum_k p_k \sum_i p(s_i | S_k) \cdot log(p(s_i | 
 
 * $X$ and $Y$ are *related*, but still *random* (usually because of *noise*)
 
+### What do we want
+
+* Successful communication: receive $Y$, deduce what was sent $X$
+* We are interested in **deducing X when knowing Y**
+* How much does knowing $Y$ tell us about $X$? 
+    * Depends on the relation between them
+    * Is the same as how much $X$ tells us about $Y$ (symmetrical)
+
 ### Nomenclature
 
 * Discrete: the input alhabet and the output alphabet are finite
@@ -603,7 +611,7 @@ Three examples to help you remember conditional probabilities
 
 * CNN: [Crippled cruise ship returns; passengers happy to be back](http://edition.cnn.com/2013/02/14/travel/cruise-ship-fire/)
 
-### Conditional entropy H(Y|X)
+### Conditional entropy H(Y|X) (mean error)
 
 * Since each row is a distribution, each row has an entropy
 * Entropy of row $x_i$:
@@ -611,7 +619,7 @@ $$H(Y|x_i) = -\sum_j p(y_j|x_i) log(p(y_j|x_i))$$
 * *"The uncertainty of the output message when the input message is $x_i$"*
 * Example: lottery
 
-### Conditional entropy H(Y|X)
+### Conditional entropy H(Y|X) (mean error)
 
 * A different $H(Y|x_i)$ for every $x_i$
 * Compute the average over all $x_i$:
@@ -701,16 +709,23 @@ I(X,Y) &= H(X) - H(X|Y) \\
        &= \sum_i \sum_j p(x_i \cap y_j) log(\frac{p(x_i|y_j)}{p(x_i)}) \\
        &= \sum_i \sum_j p(x_i \cap y_j) log(\frac{p(x_i \cap y_j)}{p(x_i)p(y_j)}) \\
 \end{aligned}$$
-    
+
 ### Properties of mutual information
 Mutual information $I(X,Y)$ is:
 
-* a special case of the Kullback–Leibler distance (relative entropy distance) of two distributions:
-$$D_{KL}(P,Q) = \sum_i P(i) log(\frac{P(i)}{Q(i)})$$
-$$I(X,Y) = D(p(x_i \cap y_j), p(x_i) \cdot p(y_j))$$
-
 * commutative: $I(X,Y) = I(Y,X)$
 * non-negative: $I(X,Y) \geq 0$
+* a special case of the Kullback–Leibler distance (relative entropy distance)
+
+**Definition**: the Kullback–Leibler distance of two distributions is
+$$D_{KL}(P,Q) = \sum_i P(i) log(\frac{P(i)}{Q(i)})$$
+
+* In our case, the distributions are:
+    * $P = p(x_i \cap y_j)$ (distribution of our system)
+    * $Q = p(x_i) \cdot p(y_j)$ (distribution of two independent variables)
+
+$$I(X,Y) = D(p(x_i \cap y_j), p(x_i) \cdot p(y_j))$$
+
 
 ### Relations between the informational measures
 
@@ -727,3 +742,49 @@ $$I(X,Y) = H(X) - H(X|Y) = H(Y) - H(Y|X)$$
 * Simplest to find first H(X), H(Y), H(X,Y) ---> then find others
 
 ### Types of communication channels
+
+1. Channels with zero equivocation
+$$ H(X|Y) = 0$$
+    * Each column of the noise (channel) matrix contains only one non-zero value
+    * No doubts on the input messages when the output messages are known
+    * All input information is transmitted
+$$ I(X,Y) = H(X)$$
+
+* Example: codewords...
+
+### Types of communication channels
+
+2. Channels with zero mean error
+$$H(Y|X) = 0$$
+    * Each row of the noise (channel) matrix contains only one non-zero value
+    * No doubts on the output messages when the input messages are known
+    * *The converse is not necessary true!*
+    * All input information is transmitted
+
+* Example: AND gate
+
+### Types of communication channels
+
+3. Channels uniform with respect to the input
+
+$$H(Y|x_i) = same$$
+    * Each row of noise matrix contains the same values, possibly in different order
+    * $H(H(Y|x_i) = same = H(Y|X)$
+    * $H(Y|X)$ does not depend on the actual probabilities $p(x_i)$
+
+### Types of communication channels
+
+4. Channels uniform with respect to the output
+
+$$H(X|y_j) = same$$
+    * Each column of noise matrix contains the same values, possibly in different order
+    * If the input messages are equiprobable, the output messages are also equiprobable
+
+### Types of communication channels
+
+5. Symmetric channels
+
+    * Uniform with respect to the input and to the output
+
+### Channel capacity
+
