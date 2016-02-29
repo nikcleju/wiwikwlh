@@ -204,7 +204,7 @@ We prove the following **properties of entropy**:
 1. $H(S) \geq  0$ (non-negative)
 
 2. $H(S)$ is maximum when all $n$ messages have equal probability $\frac{1}{n}$.
-The maximum value is $max H(S) = log(n)$.
+The maximum value is $\max H(S) = log(n)$.
 
 3. *Diversfication* of the source always increases the entropy
 
@@ -250,7 +250,7 @@ $$\sIV{S}{0.14}{0.29}{0.4}{0.17}$$
 per unit of time**:
 $$H_\tau(S) = \frac{H(S)}{\overline{t}}$$
 where $\overline{t}$ is the average duration of transmitting a message:
-$$H(S) = \sum_{i} p_i t_i $$
+$$\overline{t} = \sum_{i} p_i t_i $$
 
 ### Extended DMS
 
@@ -785,6 +785,67 @@ $$H(X|y_j) = same$$
 5. Symmetric channels
 
     * Uniform with respect to the input and to the output
+    * Example: binary symmetric channel
 
 ### Channel capacity
 
+* What is the maximum information we can transmit on a certain channel?
+
+* **Definition:** the information capacity of a channel is the maximum value
+of the mutual information, where the maximization is done over the input
+probabilities $p(x_i)$
+$$C = \max_{p(x_i)} \; I(X,Y)$$
+
+* i.e. the maximum mutual information we can obtain if we are allowed to
+choose $p(x_i)$ as we want
+
+* Useful alternative expression:
+$$C = \max_{p(x_i)} \; (H(X) - H(X|Y))$$
+
+### What channel capacity means
+* Channel capacity is the maximum information we can transmit on a channel, 
+on average, with one message
+* One of the most important notions in information theory
+* Its importance comes from Shannon's second theorem (noisy channel theorem)
+
+### Preview of the channel coding theorem
+
+* Even though some information $I(X,Y)$ is transmitted on the channel, 
+there still is the $H(X|Y)$ uncertainty on the input
+* We want error-free transmission, with no uncertainty
+* Solution: use error coding (see chapter IV)
+* How coding works:
+    * coder receives $k$ symbols (bits, usually) that we want to transmit
+    * coder appends additional $m$ symbols computed via some coding algorithm
+    * the total $k+m$ bits are transmitted over a noisy channel
+    * the decoding algorithm tries to detect and correct errors, based
+    on the additional $m$ bits that were appended
+* Coding rate: $$R = \frac{k}{k+m}$$
+    * stronger protection = bigger $m$ = less efficient
+    * weaker protection = smaller $m$ = more efficient
+
+
+### Preview of the channel coding theorem
+
+* A rate is called **achievable** for a channel if, for that rate, there exists a coding and decoding
+algorithm guaranteed to correct all possible errors on the channel
+
+
+#### Shannon's noisy channel coding theorem (second theorem)
+For a given channel, all rates below capacity $R < C$ are achievable. All rates
+above capacity, $R > C$, are not achievable.
+
+### Channel coding theorem explained
+
+In layman terms:
+
+* For all coding rates $R<C$, there is a way to recover the transmitted data perfectly (de/coding algorithm will detect and correct
+all errors)
+* For all coding rates $R>C$, there is no way to recover the transmitted data perfectly
+
+Example:
+
+* Send binary digits (0,1) on a channel with capacity 0.7 bits/message
+* There exists coding schemes with R < 0.7 that allow perfect recovery
+    * i.e. for every 7 bits of data coding adds 3 or more bits, on average => $R = \frac{7}{7+3}$
+* With less than 3 bits for every 7 bits of data => impossible to recover all the data

@@ -12,11 +12,13 @@
 \newcommand{\fIoVI}{\frac{1}{6}}
 \newcommand{\fIoVII}{\frac{1}{7}}
 \newcommand{\fIoVIII}{\frac{1}{8}}
-\addtobeamertemplate{block begin}{}{\setlength{\parskip}{35pt plus 1pt minus 1pt}}
-\addtobeamertemplate{block begin}{}{\setlength{\parskip}{35pt plus 1pt minus 1pt}}
+%\addtobeamertemplate{block begin}{}{\setlength{\parskip}{35pt plus 1pt minus 1pt}}
+%\addtobeamertemplate{block begin}{}{\setlength{\parskip}{35pt plus 1pt minus 1pt}}
   
-\usetheme{default}
-\usecolortheme{whale}
+%\usetheme{default}
+\usetheme{Madrid}
+\setbeamertemplate{footline}{} % disable footer
+%\usecolortheme{whale}
 \setbeamertemplate{itemize items}[default]
 \setbeamertemplate{enumerate items}[default]
 
