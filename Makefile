@@ -30,6 +30,7 @@ includes: includes.hs
 html:   tutorial.md slides.md
 	cat $< macros.md slides.md | \
 	$(PANDOC) -c $(STYLE) --template $(TEMPLATE) -s -f $(IFORMAT)+latex_macros -t html+latex_macros $(FLAGS) > tutorial.html
+	cp tutorial.html index.html
 
 %.epub: %.md includes
 	./includes < $< | $(PANDOC) -f $(IFORMAT) -t epub $(FLAGS) -o $@

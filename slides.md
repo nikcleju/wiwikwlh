@@ -425,7 +425,7 @@ $$H(S) = \sum_k p_k H(S_k) = - \sum_k p_k \sum_i p(s_i | S_k) \cdot log(p(s_i | 
 
 ### Chapter summary
 
-* Information of a message: $i(s_i) = -log_2(p(s_i))$
+* Information of a message: $i(s_k) = -log_2(p(s_k))$
 
 * Entropy of a memoryless source: $H(S) = \sum_{k} p_k i(s_k) = -\sum_{k} p_k log_2(p_k)$
 
@@ -561,7 +561,7 @@ $$p(B | A) = \frac{p(A \cap B)}{p(A)}$$
 
 * Independence: 
 $$p(A \cap B) = p(A) p(B)$$
-$$p(B \cap A) = p(B)$$
+$$p(B | A) = p(B)$$
 
 ### Channel matrix
 
@@ -670,7 +670,7 @@ $$H(X|y_j) = -\sum_i p(x_i|y_j) log(p(x_i|y_j))$$
 $$\begin{aligned}
 H(X|Y) &= \sum_j p(y_j) H(X|y_j) \\
        &= -\sum_i \sum_j p(y_j) p(x_i|y_j) log(p(x_i|y_j)) \\
-       &= -\sum_i \sum_j p(x_i cap y_j) log(p(x_i|y_j))
+       &= -\sum_i \sum_j p(x_i \cap y_j) log(p(x_i|y_j))
 \end{aligned}$$
 * **"The uncertainty of the input message when we know the output message"** (any output, in general)
 * Should be small for a good communication
@@ -768,17 +768,19 @@ $$H(Y|X) = 0$$
 3. Channels uniform with respect to the input
 
 $$H(Y|x_i) = same$$
-    * Each row of noise matrix contains the same values, possibly in different order
-    * $H(H(Y|x_i) = same = H(Y|X)$
-    * $H(Y|X)$ does not depend on the actual probabilities $p(x_i)$
+
+* Each row of noise matrix contains the same values, possibly in different order
+* $H(Y|x_i) = same = H(Y|X)$
+* $H(Y|X)$ does not depend on the actual probabilities $p(x_i)$
 
 ### Types of communication channels
 
 4. Channels uniform with respect to the output
 
 $$H(X|y_j) = same$$
-    * Each column of noise matrix contains the same values, possibly in different order
-    * If the input messages are equiprobable, the output messages are also equiprobable
+
+* Each column of noise matrix contains the same values, possibly in different order
+* If the input messages are equiprobable, the output messages are also equiprobable
 
 ### Types of communication channels
 
