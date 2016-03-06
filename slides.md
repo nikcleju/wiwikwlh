@@ -851,3 +851,41 @@ Example:
 * There exists coding schemes with R < 0.7 that allow perfect recovery
     * i.e. for every 7 bits of data coding adds 3 or more bits, on average => $R = \frac{7}{7+3}$
 * With less than 3 bits for every 7 bits of data => impossible to recover all the data
+
+### Efficiency and redundancy
+
+* Efficiency of a channel:
+$$\eta_C = \frac{I(X,Y)}{C}$$
+
+* Absolute redundancy of a channel:
+$$ R_C= C - I(X,Y)$$
+
+* Relative redundancy of a channel:
+$$ \rho_C = \frac{R_C}{C} = 1 - \frac{I(X,Y)}{C} = 1 - \eta_C$$
+
+### Examples of channels and their capacity
+
+![Noiseless binary channel](img/NoiselessBinaryChannel.png){width=25%}
+
+* Capacity = 1 bit/message, when $p(x_1) = p(x_2) = \frac{1}{2}$
+
+### Noisy binary non-overlapping channel
+
+![Noisy binary non-overlapping](img/NoisyBinaryChannelNonoverlapping.png){width=25%}
+
+* There is noise ($H(Y|X) > 0$), but can deduce the input ($H(X|Y) = 0$)
+* Capacity = 1 bit/message, when $p(x_1) = p(x_2) = \frac{1}{2}$
+
+### Noisy typewriter
+
+![Noisy typewriter](img/NoisyTypewriter.png){width=25%}
+
+$$\begin{aligned}
+\max{I(X,Y)} &= \max{(H(Y) - H(Y|X))} = \max{H(Y)} - 1 \\
+            &= log(26) - 1 = log(13)
+\end{aligned}$$
+
+### Noisy typewriter
+
+* Capacity = log(13) bit/message, when input probabilities are uniform
+* Can transmit 13 letters with no errors (A, C, E, G, ...)
