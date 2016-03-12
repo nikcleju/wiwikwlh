@@ -870,7 +870,7 @@ $$ \rho_C = \frac{R_C}{C} = 1 - \frac{I(X,Y)}{C} = 1 - \eta_C$$
 * Channel is uniform with respect to the input:
 
     * $H(Y|X)$ does not depend on the actual probabilities $p(x_i)$
-    * $C = \max_{p(x_i)} \; I(X,Y) = \max_{p(x_i)} \; (H(Y) - H(Y|X))$ = \max_{p(x_i)} \; (H(Y)) - H(Y|X)$ 
+    * $C = \max_{p(x_i)} \; I(X,Y) = \max_{p(x_i)} \; (H(Y) - H(Y|X)) = \max_{p(x_i)} \; (H(Y)) - H(Y|X)$ 
     * Should maximize $H(Y)$
 
 * If channel is also uniform with respect to the output:
@@ -880,7 +880,6 @@ $$ \rho_C = \frac{R_C}{C} = 1 - \frac{I(X,Y)}{C} = 1 - \eta_C$$
     * if $p(x_i)$ = uniform = $\frac{1}{n}$, then $p(y_j) = \frac{1}{n} \sum_i p(y_j|x_i)$ = uniform 
     * therefore $p(y_j)$ are constant = uniform = H(Y) is maximized
     
-
 ### Examples of channels and their capacity
 
 ![Noiseless binary channel](img/NoiselessBinaryChannel.png){width=25%}
@@ -922,5 +921,125 @@ $$\begin{aligned}
 * Different from BSC: here we know when errors happened\
 * Capacity = $1 - p$
 * Intuitive meaning: lose $p$ bits, remaining bits = capacity = $1-p$
+
+### Symmetric channel of $n$-th order
+
+![$N$-th order symmetric channel](img/NthSC.png){width=25%}
+
+* Extension of binary symmetric channel for $n$ messages
+* $1-p$ chances that symbol has no error
+* $p$ chances that symbol is changed, uniformly to any other (N-1) symbols ($\frac{p}{N-1}$ each)
+
+### Symmetric channel of $n$-th order
+
+* Channel is symmetric => 
+$$C = \max_{p(x_i)} \; I(X,Y) = \max_{p(x_i)} \; (H(Y) - H(Y|X)) = \max_{p(x_i)} \; (H(Y)) - H(Y|X)$$
+* $\max_{p(x_i)} \; (H(Y))  = \log(N)$
+* $H(Y|X) = H(Y|x_i)$ = entropy of any row (same values)
+
+==>
+
+$$C = \log(N) + (1-p)\log(1-p) + p \log(\frac{p}{N-1})$$
+
+* Capacity is reached when input probabilities are uniform
+
+### Chapter summary
+
+* Channel = Probabilistic system with two random variables $X$ and $Y$
+
+* Characterization of transmission:
+    * P(X,Y) => H(X,Y) *joint entropy*
+    * $p(x_i)$, $p(y_j)$ *marginal distributions* => H(X), H(Y) 
+    * P(Y|X) *channel matrix* => H(Y|X) *average noise*
+    * P(X|Y) => H(X|Y) *equivocation*
+    * I(X,Y) *mutual information*
+
+* Channel capacity: $C = \max_{p(x_i)} \; I(X,Y)$
+
+* Examples:
+    * Binary symmetric channel: $C = 1 - H_p$
+    * Binary erasure channel: $C = 1 - p$
+    * $N$-th symmetric channel: $C = \log(N) - H(of \; a \; row \; of \; channel \; matrix )$
+
+### History
+
+![Claude Shannon (1916 - 2001)](img/Shannon.jpg){width=25%}
+
+* *A mathematical theory of communications*, 1948
+
+### Exercises and problems
+* At blackboard only
+
+
+
+## Chapter III: Source coding
+
+### What does coding do?
+
+![Communication system](img/CommBlockDiagram.png){width=40%}
+
+* Why coding?
+
+1. Source coding:
+    * Convert source messages to channel symbols (for example 0,1)
+    * Minimize number of symbols needed
+    * Adapt probabilities of symbols to maximize mutual information
+
+2. Error control
+    * Protection against channel errors
+    
+### Source-channel separation theorem
+
+* Source-channel separation theorem (informal):
+ 
+It is possible to obtain the best reliable communication by performing the
+two tasks separately:
+    1. Source coding: to minimize number of symbols needed
+    2. Error control coding (channel coding): to provide protection against noise
+
+### Source coding
+
+* Assume we code for transmission over ideal channels with no noise
+* Transmitted symbols are perfectly recovered at the receiver
+
+Main concern: minimize the number of symbols needed to represent the messages $x_i$
+
+* Advantages:
+    * Efficiency
+    * Short communication times
+
+### Definitions
+
+* Let $S = {s_1, s_2, ... s_N}$ = an input discrete memoryless source
+* Let $X = {x_1, x_2, ... x_M}$ = the alphabet of the code
+    * Example: binary: {0,1}
+
+* Coding = each message $s_i$ is assigned a **codeword** $c_i$:
+
+Message    Codeword
+-------    --------    
+$s_1$        $c_1 = x_1x_2x_1...$
+$s_2$        $c_2 = x_1x_2x_2...$
+...        ....
+$s_N$        $c_3 = x_2x_2x_2...$
+
+* A *code* C is the set of all codewords:
+$$C = {c_1, c_2, ... c_N}$$
+
+* Decoding: given a sequence of symbols, deduce the original sequence of messages
+
+### Example: ASCII code
+
+![ASCII code (partial)](img/ASCIIcode.png){width=50%}
+
+### Definitions
+
+A code can be:
+* **non-singular**: all codewords are different
+* **uniquely decodable**: for any received sequence of symbols, there is only one corresponding sequence of messages
+    * i.e. no sequence og messages produces the same sequence of symbols
+    * i.e. there is never a confusion at decoding
+
+Examples: at the blackboard
 
 
