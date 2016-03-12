@@ -137,14 +137,14 @@ $$\snII{S}{0}{\fIoII}{1}{\fIoII}$$
 information that a particular message took place.
 
 * The information attached to a particular event (message) is rigorously defined as:
-$$i(s_i) = -log_2(p(s_i))$$
+$$i(s_i) = -\log_2(p(s_i))$$
 
 * Properties:
 
     * $i(s_i) \geq 0$
     * lower probability (rare events) means higher information
     * higher probability (frequent events) means lower information
-    * a certain event brings no information: $-log(1) = 0$
+    * a certain event brings no information: $-\log(1) = 0$
     * an event with probability 0 brings infinite information (but it never happens..)
 
 
@@ -156,7 +156,7 @@ $$i(s_i) = -log_2(p(s_i))$$
 * We are interested in the *average* information of a message from a DMS.
 
 * Definition: the entropy of a DMS source $S$ is **the average information of a message**:
-$$H(S) = \sum_{k} p_k i(s_k) = -\sum_{k} p_k log_2(p_k)$$
+$$H(S) = \sum_{k} p_k i(s_k) = -\sum_{k} p_k \log_2(p_k)$$
 where $p_k = p(s_k)$  is the probability of message $k$.
 
 
@@ -164,22 +164,22 @@ where $p_k = p(s_k)$  is the probability of message $k$.
 
 * Any base of logarithm can be used in the definition.
 
-* Usual convention: use binary logarithm $log_2()$. H(S) measured in *bits* (*bits / message*)
+* Usual convention: use binary logarithm $\log_2()$. H(S) measured in *bits* (*bits / message*)
 
 * If using natural logarithm $ln()$, H(S) is measured in $nats$.
 
 * Logarithm bases can be converted to/from one another:
-$$ log_b(x) = \frac{log_a(x)}{log_a(b)} $$
+$$ \log_b(x) = \frac{\log_a(x)}{\log_a(b)} $$
 
 * Entropies using different logarithms differ only in scaling:
-$$ H_b(S) =\frac{H_a(S)}{log_a(b)}  $$
+$$ H_b(S) =\frac{H_a(S)}{\log_a(b)}  $$
 
 
 ### Examples
 
 * Coin: $H(S) = 1 bit/message$
-* Dice: $H(S) = log(6) bits/message$
-* Lottery: $H(S) = -0.9999 log(0.9999) - 0.0001 log(0.0001)$
+* Dice: $H(S) = \log(6) bits/message$
+* Lottery: $H(S) = -0.9999 \log(0.9999) - 0.0001 \log(0.0001)$
 * Receiving 1 bit: $H(S) = 1 bit/message$ (hence the name!)
 
 
@@ -204,7 +204,7 @@ We prove the following **properties of entropy**:
 1. $H(S) \geq  0$ (non-negative)
 
 2. $H(S)$ is maximum when all $n$ messages have equal probability $\frac{1}{n}$.
-The maximum value is $\max H(S) = log(n)$.
+The maximum value is $\max H(S) = \log(n)$.
 
 3. *Diversfication* of the source always increases the entropy
 
@@ -214,7 +214,7 @@ The maximum value is $\max H(S) = log(n)$.
 $$\sII{S}{p}{1-p}$$
 
 * It's entropy is:
-$$H(S) = -p \cdot log(p) - (1-p) \cdot log(1-p)$$
+$$H(S) = -p \cdot \log(p) - (1-p) \cdot \log(1-p)$$
 
 * Graphical plot...
 
@@ -356,7 +356,7 @@ Example here
 
 ### Entropy of sources with memory
 * Each state $S_k$ has a different distribution --> each state has a different entropy $H(S_k)$
-$$H(S_k) = - \sum_i p(s_i | S_k) \cdot log(p(s_i | S_k))$$
+$$H(S_k) = - \sum_i p(s_i | S_k) \cdot \log(p(s_i | S_k))$$
 
 * Global entropy = average entropy
 $$H(S) = \sum_k p_k H(S_k)$$
@@ -401,7 +401,7 @@ $[p_1, p_2, ... p_N] \cdot [T] = [p_1, p_2, ... p_N]$
 ### Entropy of ergodic sources with memory 
 
 * The entropy of an ergodic source with memory is
-$$H(S) = \sum_k p_k H(S_k) = - \sum_k p_k \sum_i p(s_i | S_k) \cdot log(p(s_i | S_k)$$
+$$H(S) = \sum_k p_k H(S_k) = - \sum_k p_k \sum_i p(s_i | S_k) \cdot \log(p(s_i | S_k)$$
 
 ### Example English text as sources with memory
 
@@ -425,15 +425,15 @@ $$H(S) = \sum_k p_k H(S_k) = - \sum_k p_k \sum_i p(s_i | S_k) \cdot log(p(s_i | 
 
 ### Chapter summary
 
-* Information of a message: $i(s_k) = -log_2(p(s_k))$
+* Information of a message: $i(s_k) = -\log_2(p(s_k))$
 
-* Entropy of a memoryless source: $H(S) = \sum_{k} p_k i(s_k) = -\sum_{k} p_k log_2(p_k)$
+* Entropy of a memoryless source: $H(S) = \sum_{k} p_k i(s_k) = -\sum_{k} p_k \log_2(p_k)$
 
 * Properties of entropy:
     
     1. $H(S) \geq  0$
 
-    2. Is maximum when all messages have equal probability ($H_{max}(S) = log(n)$)
+    2. Is maximum when all messages have equal probability ($H_{max}(S) = \log(n)$)
 
     3. *Diversfication* of the source always increases the entropy
 
@@ -443,7 +443,7 @@ $$H(S) = \sum_k p_k H(S_k) = - \sum_k p_k \sum_i p(s_i | S_k) \cdot log(p(s_i | 
 $[p_1, p_2, ... p_N] \cdot [T] = [p_1, p_2, ... p_N]$, $\sum_i p_i = 1$.
 
 * Entropy of sources with memory:
-$$H(S) = \sum_k p_k H(S_k) = - \sum_k p_k \sum_i p(s_i | S_k) \cdot log(p(s_i | S_k)$$
+$$H(S) = \sum_k p_k H(S_k) = - \sum_k p_k \sum_i p(s_i | S_k) \cdot \log(p(s_i | S_k)$$
 
 
 
@@ -514,7 +514,7 @@ $$\sum_i \sum_j p(x_i \cap y_j) = 1$$
 ### Joint entropy
 
 * The distribution $X \cap Y$ determines the **joint entropy**:
-$$H(X,Y) = - \sum_i \sum_j p(x_i \cap y_j) \cdot log(p(x_i \cap y_j))$$
+$$H(X,Y) = - \sum_i \sum_j p(x_i \cap y_j) \cdot \log(p(x_i \cap y_j))$$
 
 * This is the global entropy of the system (knowing the input and the output)
 
@@ -615,7 +615,7 @@ Three examples to help you remember conditional probabilities
 
 * Since each row is a distribution, each row has an entropy
 * Entropy of row $x_i$:
-$$H(Y|x_i) = -\sum_j p(y_j|x_i) log(p(y_j|x_i))$$
+$$H(Y|x_i) = -\sum_j p(y_j|x_i) \log(p(y_j|x_i))$$
 * *"The uncertainty of the output message when the input message is $x_i$"*
 * Example: lottery
 
@@ -625,8 +625,8 @@ $$H(Y|x_i) = -\sum_j p(y_j|x_i) log(p(y_j|x_i))$$
 * Compute the average over all $x_i$:
 $$\begin{aligned}
 H(Y|X) &= \sum_i p(x_i) H(Y|x_i) \\
-       &= -\sum_i \sum_j p(x_i) p(y_j|x_i) log(p(y_j|x_i)) \\
-       &= -\sum_i \sum_j p(x_i \cap y_j) log(p(y_j|x_i))
+       &= -\sum_i \sum_j p(x_i) p(y_j|x_i) \log(p(y_j|x_i)) \\
+       &= -\sum_i \sum_j p(x_i \cap y_j) \log(p(y_j|x_i))
 \end{aligned}$$
 * **"The uncertainty of the output message when we know the input message"** (any input, in general)
 
@@ -659,7 +659,7 @@ p(x_N | y_1) & p(x_N | y_2) & \cdots & p(x_N | y_M) \\
 
 * Since each column is a distribution, each column has an entropy
 * Entropy of column $y_j$:
-$$H(X|y_j) = -\sum_i p(x_i|y_j) log(p(x_i|y_j))$$
+$$H(X|y_j) = -\sum_i p(x_i|y_j) \log(p(x_i|y_j))$$
 * *"The uncertainty of the input message when the output message is $y_j$"*
 * Example: ...
 
@@ -669,8 +669,8 @@ $$H(X|y_j) = -\sum_i p(x_i|y_j) log(p(x_i|y_j))$$
 * Compute the average over all $y_j$:
 $$\begin{aligned}
 H(X|Y) &= \sum_j p(y_j) H(X|y_j) \\
-       &= -\sum_i \sum_j p(y_j) p(x_i|y_j) log(p(x_i|y_j)) \\
-       &= -\sum_i \sum_j p(x_i \cap y_j) log(p(x_i|y_j))
+       &= -\sum_i \sum_j p(y_j) p(x_i|y_j) \log(p(x_i|y_j)) \\
+       &= -\sum_i \sum_j p(x_i \cap y_j) \log(p(x_i|y_j))
 \end{aligned}$$
 * **"The uncertainty of the input message when we know the output message"** (any output, in general)
 * Should be small for a good communication
@@ -704,10 +704,10 @@ $$H(Y|X) = H(Y)$$
 ### Mutual information I(X,Y)
 $$\begin{aligned}
 I(X,Y) &= H(X) - H(X|Y) \\
-       &= -\sum_i p(x_i) log(p(x_i)) + \sum_i \sum_j p(x_i \cap y_j) log(p(x_i|y_j)) \\
-       &= -\sum_i \sum_j p(x_i \cap y_j) log(p(x_i)) + \sum_i \sum_j p(x_i \cap y_j) log(p(x_i|y_j)) \\
-       &= \sum_i \sum_j p(x_i \cap y_j) log(\frac{p(x_i|y_j)}{p(x_i)}) \\
-       &= \sum_i \sum_j p(x_i \cap y_j) log(\frac{p(x_i \cap y_j)}{p(x_i)p(y_j)}) \\
+       &= -\sum_i p(x_i) \log(p(x_i)) + \sum_i \sum_j p(x_i \cap y_j) \log(p(x_i|y_j)) \\
+       &= -\sum_i \sum_j p(x_i \cap y_j) \log(p(x_i)) + \sum_i \sum_j p(x_i \cap y_j) \log(p(x_i|y_j)) \\
+       &= \sum_i \sum_j p(x_i \cap y_j) \log(\frac{p(x_i|y_j)}{p(x_i)}) \\
+       &= \sum_i \sum_j p(x_i \cap y_j) \log(\frac{p(x_i \cap y_j)}{p(x_i)p(y_j)}) \\
 \end{aligned}$$
 
 ### Properties of mutual information
@@ -718,7 +718,7 @@ Mutual information $I(X,Y)$ is:
 * a special case of the Kullback–Leibler distance (relative entropy distance)
 
 **Definition**: the Kullback–Leibler distance of two distributions is
-$$D_{KL}(P,Q) = \sum_i P(i) log(\frac{P(i)}{Q(i)})$$
+$$D_{KL}(P,Q) = \sum_i P(i) \log(\frac{P(i)}{Q(i)})$$
 
 * In our case, the distributions are:
     * $P = p(x_i \cap y_j)$ (distribution of our system)
@@ -863,6 +863,24 @@ $$ R_C= C - I(X,Y)$$
 * Relative redundancy of a channel:
 $$ \rho_C = \frac{R_C}{C} = 1 - \frac{I(X,Y)}{C} = 1 - \eta_C$$
 
+
+### Computing the capacity
+
+* Tricks for easier computation of the capacity
+* Channel is uniform with respect to the input:
+
+    * $H(Y|X)$ does not depend on the actual probabilities $p(x_i)$
+    * $C = \max_{p(x_i)} \; I(X,Y) = \max_{p(x_i)} \; (H(Y) - H(Y|X))$ = \max_{p(x_i)} \; (H(Y)) - H(Y|X)$ 
+    * Should maximize $H(Y)$
+
+* If channel is also uniform with respect to the output:
+
+    * same values on columns of P(Y|X)
+    * $p(y_j) = \sum_i p(y_j|x_i) p(x_i)$
+    * if $p(x_i)$ = uniform = $\frac{1}{n}$, then $p(y_j) = \frac{1}{n} \sum_i p(y_j|x_i)$ = uniform 
+    * therefore $p(y_j)$ are constant = uniform = H(Y) is maximized
+    
+
 ### Examples of channels and their capacity
 
 ![Noiseless binary channel](img/NoiselessBinaryChannel.png){width=25%}
@@ -882,10 +900,27 @@ $$ \rho_C = \frac{R_C}{C} = 1 - \frac{I(X,Y)}{C} = 1 - \eta_C$$
 
 $$\begin{aligned}
 \max{I(X,Y)} &= \max{(H(Y) - H(Y|X))} = \max{H(Y)} - 1 \\
-            &= log(26) - 1 = log(13)
+            &= \log(26) - 1 = \log(13)
 \end{aligned}$$
 
 ### Noisy typewriter
 
 * Capacity = log(13) bit/message, when input probabilities are uniform
 * Can transmit 13 letters with no errors (A, C, E, G, ...)
+
+### Binary symmetric channel
+
+![Binary symmetric channel (BSC) ](img/BSC.png){width=25%}
+
+* Capacity = $1 - H_p$ = $1 + p \log(p) + (1-p) \log(1-p)$
+* Capacity is reached when input distribution is uniform
+
+### Binary erasure channel
+
+![Binary erasure channel](img/BSC.png){width=25%}
+
+* Different from BSC: here we know when errors happened\
+* Capacity = $1 - p$
+* Intuitive meaning: lose $p$ bits, remaining bits = capacity = $1-p$
+
+
