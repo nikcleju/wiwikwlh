@@ -759,7 +759,6 @@ $$H(Y|X) = 0$$
     * Each row of the noise (channel) matrix contains only one non-zero value
     * No doubts on the output messages when the input messages are known
     * *The converse is not necessary true!*
-    * All input information is transmitted
 
 * Example: AND gate
 
@@ -777,10 +776,10 @@ $$H(Y|x_i) = same$$
 
 4. Channels uniform with respect to the output
 
-$$H(X|y_j) = same$$
-
 * Each column of noise matrix contains the same values, possibly in different order
 * If the input messages are equiprobable, the output messages are also equiprobable
+
+* Attention: $$H(X|y_j) \neq same!$$
 
 ### Types of communication channels
 
@@ -801,7 +800,8 @@ $$C = \max_{p(x_i)} \; I(X,Y)$$
 * i.e. the maximum mutual information we can obtain if we are allowed to
 choose $p(x_i)$ as we want
 
-* Useful alternative expression:
+* Use together with definition of $I(X,Y)$:
+$$C = \max_{p(x_i)} \; (H(Y) - H(Y|X))$$
 $$C = \max_{p(x_i)} \; (H(X) - H(X|Y))$$
 
 ### What channel capacity means
@@ -879,6 +879,13 @@ $$ \rho_C = \frac{R_C}{C} = 1 - \frac{I(X,Y)}{C} = 1 - \eta_C$$
     * $p(y_j) = \sum_i p(y_j|x_i) p(x_i)$
     * if $p(x_i)$ = uniform = $\frac{1}{n}$, then $p(y_j) = \frac{1}{n} \sum_i p(y_j|x_i)$ = uniform 
     * therefore $p(y_j)$ are constant = uniform = H(Y) is maximized
+    * H(Y) is maximized when H(X) is maximized (equiprobable messages)
+
+### Computing the capacity
+
+* If channel is symmetric: use both tricks
+    * $C = \max_{p(x_i)} \; (H(Y)) - H(Y|X)$ 
+    * H(Y) is maximized when H(X) is maximized (equiprobable messages)
     
 ### Examples of channels and their capacity
 
@@ -916,7 +923,7 @@ $$\begin{aligned}
 
 ### Binary erasure channel
 
-![Binary erasure channel](img/BSC.png){width=25%}
+![Binary erasure channel](img/BinaryErasureChannel.png){width=25%}
 
 * Different from BSC: here we know when errors happened\
 * Capacity = $1 - p$
