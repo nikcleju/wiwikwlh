@@ -1,4 +1,5 @@
 PANDOC = pandoc
+PANDOCMY = pandocmy
 IFORMAT = markdown
 FLAGS = --standalone --toc --toc-depth=2 --highlight-style pygments --mathml
 TEMPLATE = page.tmpl
@@ -46,5 +47,11 @@ slides:
 
 slidestex: 
 	$(PANDOC) -s -f $(IFORMAT)+latex_macros -t beamer -o slides.tex --slide-level 3 --include-in-header slides_header.md --include-in-header macros.md  slides_header.md slides.md
-
 	
+slidesnative:
+	$(PANDOC) -s -f $(IFORMAT)+latex_macros -t native -o slides.txt --slide-level 3 --include-in-header macros.md  slides_header.md slides.md
+
+my: html myslides
+
+myslides: 
+	$(PANDOCMY) -s -f $(IFORMAT)+latex_macros -t beamer -o slides.pdf --slide-level 3 --include-in-header macros.md  slides_header.md slides.md

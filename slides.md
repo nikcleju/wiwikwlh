@@ -990,10 +990,11 @@ $$C = \log(N) + (1-p)\log(1-p) + p \log(\frac{p}{N-1})$$
     
 ### Source-channel separation theorem
 
-* Source-channel separation theorem (informal):
+Source-channel separation theorem (informal):
  
-It is possible to obtain the best reliable communication by performing the
+* It is possible to obtain the best reliable communication by performing the
 two tasks separately:
+
     1. Source coding: to minimize number of symbols needed
     2. Error control coding (channel coding): to provide protection against noise
 
@@ -1002,11 +1003,14 @@ two tasks separately:
 * Assume we code for transmission over ideal channels with no noise
 * Transmitted symbols are perfectly recovered at the receiver
 
-Main concern: minimize the number of symbols needed to represent the messages $x_i$
+* Main concerns:
+    * minimize the number of symbols needed to represent the messages
+    * make sure we can decode the messages
 
 * Advantages:
     * Efficiency
     * Short communication times
+    * Can decode easily
 
 ### Definitions
 
@@ -1014,7 +1018,8 @@ Main concern: minimize the number of symbols needed to represent the messages $x
 * Let $X = {x_1, x_2, ... x_M}$ = the alphabet of the code
     * Example: binary: {0,1}
 
-* Coding = each message $s_i$ is assigned a **codeword** $c_i$:
+* A **code** is a mapping from $S$ to the set of all codewords:
+$$C = {c_1, c_2, ... c_N}$$
 
 Message    Codeword
 -------    --------    
@@ -1023,23 +1028,100 @@ $s_2$        $c_2 = x_1x_2x_2...$
 ...        ....
 $s_N$        $c_3 = x_2x_2x_2...$
 
-* A *code* C is the set of all codewords:
-$$C = {c_1, c_2, ... c_N}$$
-
 * Decoding: given a sequence of symbols, deduce the original sequence of messages
+
+* Codeword length $l_i$ = the number of symbols in $c_i$
 
 ### Example: ASCII code
 
 ![ASCII code (partial)](img/ASCIIcode.png){width=50%}
 
+### Average code length
+
+* How to measure representation efficiency of a code? 
+
+* **Average code length** = average of the codeword lengths:
+$$\overline{l} = \sum_i p(s_i) l_i$$
+
+* The probability of a codeword = the probability of the corresponding message
+* Smaller average length: code more efficient (better)
+* How small can the average length be?
+
 ### Definitions
 
 A code can be:
+
 * **non-singular**: all codewords are different
 * **uniquely decodable**: for any received sequence of symbols, there is only one corresponding sequence of messages
-    * i.e. no sequence og messages produces the same sequence of symbols
+    * i.e. no sequence of messages produces the same sequence of symbols
     * i.e. there is never a confusion at decoding
+* **instantaneous** (also known as **prefix-free**): no codeword is prefix to another code
+    * A *prefix* = a codeword which is the beginning of another codeword    
+    
 
 Examples: at the blackboard
 
+### The graph of a code
 
+Example at blackboard
+
+### Instantaneous codes are uniquely decodable
+
+#### Theorem
+An instantaneous code is uniquely decodable
+
+(The converse is not necessary true; there exist uniquely decodable codes which
+are not instantaneous)
+
+#### Proof
+* blackboard
+
+* How to decode an instantaneous code: graph-based decoding
+* Advantage on instantaneous code over uniquely decodable: simple decoding
+
+### Existence of instantaneous codes
+
+* When can there an instantaneous code exist?
+
+#### Kraft inequality theorem
+There exists an instantaneous code with $D$ symbols and codeword lengths ${l_1, l_2, \ldots l_n}$
+if and only if the lengths satisfy the following inequality:
+$$ \sum_i D^{-l_i} \geq 1.$$
+
+#### Proof
+At blackboard
+
+####
+
+Comments:
+
+* If lengths do not satisfy this, no instantaneous code exists
+* If the lengths of a code satisfy this, that code can be instantaneous or not (there exists an instantaneous code,
+ but not necessarily that one)
+* Kraft inequality means that the codewords lengths cannot be all very small
+
+### Kraft inequality for uniquely decodable codes
+
+* Instantaneous codes must obey Kraft inequality
+* How about uniquely decodable codes?
+
+#### McMillan theorem
+An uniquely decodable code satisfies the Kraft inequality:
+$$ \sum_i D^{-l_i} \geq 1.$$
+
+##### Sal
+Consequence
+
+* For every uniquely decodable code, there exists in instantaneous code
+with the same lengths.
+
+* Even though the class of uniquely decodable codes is larger than that of
+instantaneous codes, we have no benefit.
+
+* We can always use just instantaneous codes.
+
+### Optimal codes
+
+### Non-optimal codes
+
+### 
