@@ -1074,14 +1074,18 @@ Example at blackboard
 
 ### Instantaneous codes are uniquely decodable
 
-#### Theorem
-An instantaneous code is uniquely decodable
+Theorem
 
-(The converse is not necessary true; there exist uniquely decodable codes which
+* An instantaneous code is uniquely decodable
+
+* (The converse is not necessary true; there exist uniquely decodable codes which
 are not instantaneous)
 
-#### Proof
+Proof
+
 * blackboard
+
+Comments:
 
 * How to decode an instantaneous code: graph-based decoding
 * Advantage on instantaneous code over uniquely decodable: simple decoding
@@ -1090,15 +1094,15 @@ are not instantaneous)
 
 * When can there an instantaneous code exist?
 
-#### Kraft inequality theorem
-There exists an instantaneous code with $D$ symbols and codeword lengths ${l_1, l_2, \ldots l_n}$
+Kraft inequality theorem:
+
+* There exists an instantaneous code with $D$ symbols and codeword lengths ${l_1, l_2, \ldots l_n}$
 if and only if the lengths satisfy the following inequality:
 $$ \sum_i D^{-l_i} \geq 1.$$
 
-#### Proof
-At blackboard
+Proof:
 
-####
+* At blackboard
 
 Comments:
 
@@ -1112,12 +1116,12 @@ Comments:
 * Instantaneous codes must obey Kraft inequality
 * How about uniquely decodable codes?
 
-#### McMillan theorem
-An uniquely decodable code satisfies the Kraft inequality:
+McMillan theorem:
+
+* An uniquely decodable code satisfies the Kraft inequality:
 $$ \sum_i D^{-l_i} \geq 1.$$
 
-##### Sal
-Consequence
+Consequence:
 
 * For every uniquely decodable code, there exists in instantaneous code
 with the same lengths.
@@ -1127,8 +1131,125 @@ instantaneous codes, we have no benefit.
 
 * We can always use just instantaneous codes.
 
+### Finding an instantaneous code for given lengths
+
+* How to find an instantaneous code with code lengths $\{l_i\}$
+
+1. Check that lengths satisfy Kraft equation
+2. Draw graph
+3. Assign nodes in a certain order (e.g. descending probability)
+
+* Easy, standard procedure
+* Example: blackboard
+
 ### Optimal codes
+
+* We want to minimize the **average length** of a code:
+$$\overline{l} = \sum_i p_i l_i$$
+
+* But the lengths must obey the Kraft inequality (for uniquely decodable)
+
+$$\begin{aligned} \textbf{minimize } &\sum_i p_i l_i \\
+\textrm{subject to } &\sum_i D^{-l_i} \geq 1
+\end{aligned}$$
+
+* The optimal values are:
+$$l_i = -\log(p_i)$$
+
+* Rigorous proof: at blackboard (method of Lagrange multiplier)
+* Intuition: using $l_i = -\log(p_i)$ satisfies Kraft with equality,
+so the lengths cannot be any shorter, in general
+
+### Entropy = minimal codeword lengths
+
+* If the optimal values are:
+$$l_i = -\log(p_i)$$
+
+* Then the minimal average length is:
+$$\min \overline{l} = \sum_i p_i l_i = -\sum_i p_i \log(p_i) = H(S)$$
+
+#### Average length >= entropy
+The average length of a uniquely decodable code cannot be smaller than
+the source entropy
+$$H(S) \leq \overline{l}$$
 
 ### Non-optimal codes
 
-### 
+* Problem: $-\log(p_i)$ might not be an integer number
+* $l_i = -\log(p_i)$ only when probabilities are power of 2 (*dyadic distribution*)
+* Shannon's solution: round to bigger integer
+$$l_i = \lceil -\log(p_i) \rceil$$
+
+### Shannon coding
+
+* Shannon coding:
+    1. Arrange probabilities in descending order
+    2. Use codeword lengths $l_i = \lceil -\log(p_i) \rceil$
+    3. Find an instantaneous code for these lengths
+
+* Simple scheme, better algorithms are available
+    * Example: compute lengths for $S: (0.9, 0.1)$
+* But still enough to prove fundamental results
+
+### Average length of Shannon code
+
+* The average length of a Shannon code satisfies
+$$H(S) \leq \overline{l} < H(S) + 1$$
+
+* Proof:
+
+1. The first inequality is because H(S) is minimum length
+2. The second inequality:
+    a. Use Shannon code:
+$$l_i = \lceil -\log(p_i) \rceil = -\log(p_i) + \epsilon_i$$ where $0 \leq \epsilon_i < 1$
+
+    a. Compute average length:
+$$\overline{l} = \sum_i p_i l_i = H(S) + \sum_i p_i \epsilon_i$$
+    a. Since $\epsilon_i < 1$ => $\sum_i p_i \epsilon_i < \sum_i p_i  = 1$
+
+### Average length of Shannon code
+
+* Shannon code approaches minimum possible lengths up to at most 1 extra bit
+    * That's not bad at all
+    * There exist even better codes, in general
+    
+* Can we get even closer to the minimum length?
+* Yes, as close as we want! See next slide.
+
+### Shannon's first theorem
+
+Shannon's first theorem (coding theorem for noiseless channels):
+
+* One can always compress messages from a source S with an average length as
+close as desired to H(S), but never below H(S) (for infinitely long sequences of messages)
+
+Proof:
+
+* Average length can never go below H(S) because this is minimum
+* How can it get very close to H(S) (from above)?
+    1. Use $n$-th order extension $S^n$ of S
+    2. Use Shannon coding for $S^n$, so it satisfies
+$$H(S^n) \leq \overline{l_{S^n}} < H(S^n) + 1$$
+    3. But $H(S^n) = n H(S)$, and **average length per message of $S$ is**
+$$\overline{l_{S}} = \frac{\overline{l_{S^n}}}{n}$$
+because messages of $S^n$ are just $n$ messages of $S$ glued together
+
+### Shannon's first theorem
+
+* Continuing:
+    4. So, dividing by $n$:
+$$\boxed{H(S) \leq \overline{l_{S}} < H(S) + \frac{1}{n}}$$
+    5. If extension order $n \to \infty$, then
+$$\overline{l_{S}} \to H(S)$$
+
+Comments:
+
+ * Shannon's first theorem says what entropy H(S) means:
+ * The entropy H(S) means the minimum number of bits required to describe a message from $S$, in general
+ * For any distribution we can approach H(S) to any desired accuracy using extensions
+ of large order
+     * The complexity is too large for large $n$, so in practice we settle 
+     with a close enough value
+* Other codes are even better the Shannon coding
+ 
+
