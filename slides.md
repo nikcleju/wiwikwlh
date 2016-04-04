@@ -1021,12 +1021,12 @@ two tasks separately:
 
 ### Definitions
 
-* Let $S = {s_1, s_2, ... s_N}$ = an input discrete memoryless source
-* Let $X = {x_1, x_2, ... x_M}$ = the alphabet of the code
+* Let $S = \left\lbrace s_1, s_2, ... s_N \right\rbrace$ = an input discrete memoryless source
+* Let $X = \left\lbrace x_1, x_2, ... x_M \right\rbrace$ = the alphabet of the code
     * Example: binary: {0,1}
 
 * A **code** is a mapping from $S$ to the set of all codewords:
-$$C = {c_1, c_2, ... c_N}$$
+$$C = \left\lbrace c_1, c_2, ... c_N \right\rbrace$$
 
 Message    Codeword
 -------    --------    
@@ -1098,7 +1098,7 @@ Kraft inequality theorem:
 
 * There exists an instantaneous code with $D$ symbols and codeword lengths ${l_1, l_2, \ldots l_n}$
 if and only if the lengths satisfy the following inequality:
-$$ \sum_i D^{-l_i} \geq 1.$$
+$$ \sum_i D^{-l_i} \leq 1.$$
 
 Proof:
 
@@ -1111,6 +1111,16 @@ Comments:
  but not necessarily that one)
 * Kraft inequality means that the codewords lengths cannot be all very small
 
+### Instantaneous codes with equality in Kraft
+
+* From the proof => we have equality in the relation
+$$ \sum_i D^{-l_i} = 1$$
+only if the lowest level is fully covered <=> no unused branches
+
+* For an instantaneous code which satisfies Kraft with equality, 
+all the graph branches terminate with codewords (there are no unused branches)
+
+
 ### Kraft inequality for uniquely decodable codes
 
 * Instantaneous codes must obey Kraft inequality
@@ -1119,7 +1129,7 @@ Comments:
 McMillan theorem:
 
 * An uniquely decodable code satisfies the Kraft inequality:
-$$ \sum_i D^{-l_i} \geq 1.$$
+$$ \sum_i D^{-l_i} \leq 1.$$
 
 Consequence:
 
@@ -1135,7 +1145,7 @@ instantaneous codes, we have no benefit.
 
 * How to find an instantaneous code with code lengths $\{l_i\}$
 
-1. Check that lengths satisfy Kraft equation
+1. Check that lengths satisfy Kraft relation
 2. Draw graph
 3. Assign nodes in a certain order (e.g. descending probability)
 
@@ -1145,46 +1155,46 @@ instantaneous codes, we have no benefit.
 ### Optimal codes
 
 * We want to minimize the **average length** of a code:
-$$\overline{l} = \sum_i p_i l_i$$
+$$\overline{l} = \sum_i p(s_i) l_i$$
 
 * But the lengths must obey the Kraft inequality (for uniquely decodable)
 
-$$\begin{aligned} \textbf{minimize } &\sum_i p_i l_i \\
-\textrm{subject to } &\sum_i D^{-l_i} \geq 1
+$$\begin{aligned} \textbf{minimize } &\sum_i p(s_i) l_i \\
+\textrm{subject to } &\sum_i D^{-l_i} \leq 1
 \end{aligned}$$
 
 * The optimal values are:
-$$l_i = -\log(p_i)$$
+$$\boxed{l_i = -\log(p(s_i))}$$
 
 * Rigorous proof: at blackboard (method of Lagrange multiplier)
-* Intuition: using $l_i = -\log(p_i)$ satisfies Kraft with equality,
+* Intuition: using $l_i = -\log(p(s_i))$ satisfies Kraft with equality,
 so the lengths cannot be any shorter, in general
 
 ### Entropy = minimal codeword lengths
 
 * If the optimal values are:
-$$l_i = -\log(p_i)$$
+$$l_i = -\log(p(s_i))$$
 
 * Then the minimal average length is:
-$$\min \overline{l} = \sum_i p_i l_i = -\sum_i p_i \log(p_i) = H(S)$$
+$$\min \overline{l} = \sum_i p(s_i) l_i = -\sum_i p(s_i) \log(p(s_i)) = H(S)$$
 
 #### Average length >= entropy
-The average length of a uniquely decodable code cannot be smaller than
+The average length of an uniquely decodable code cannot be smaller than
 the source entropy
 $$H(S) \leq \overline{l}$$
 
 ### Non-optimal codes
 
-* Problem: $-\log(p_i)$ might not be an integer number
-* $l_i = -\log(p_i)$ only when probabilities are power of 2 (*dyadic distribution*)
+* Problem: $-\log(p(s_i))$ might not be an integer number
+* $l_i = -\log(p(s_i))$ only when probabilities are power of 2 (*dyadic distribution*)
 * Shannon's solution: round to bigger integer
-$$l_i = \lceil -\log(p_i) \rceil$$
+$$l_i = \lceil -\log(p(s_i)) \rceil$$
 
 ### Shannon coding
 
 * Shannon coding:
     1. Arrange probabilities in descending order
-    2. Use codeword lengths $l_i = \lceil -\log(p_i) \rceil$
+    2. Use codeword lengths $l_i = \lceil -\log(p(s_i)) \rceil$
     3. Find an instantaneous code for these lengths
 
 * Simple scheme, better algorithms are available
@@ -1201,11 +1211,11 @@ $$H(S) \leq \overline{l} < H(S) + 1$$
 1. The first inequality is because H(S) is minimum length
 2. The second inequality:
     a. Use Shannon code:
-$$l_i = \lceil -\log(p_i) \rceil = -\log(p_i) + \epsilon_i$$ where $0 \leq \epsilon_i < 1$
+$$l_i = \lceil -\log(p(s_i)) \rceil = -\log(p(s_i)) + \epsilon_i$$ where $0 \leq \epsilon_i < 1$
 
     a. Compute average length:
-$$\overline{l} = \sum_i p_i l_i = H(S) + \sum_i p_i \epsilon_i$$
-    a. Since $\epsilon_i < 1$ => $\sum_i p_i \epsilon_i < \sum_i p_i  = 1$
+$$\overline{l} = \sum_i p(s_i) l_i = H(S) + \sum_i p(s_i) \epsilon_i$$
+    a. Since $\epsilon_i < 1$ => $\sum_i p(s_i) \epsilon_i < \sum_i p(s_i)  = 1$
 
 ### Average length of Shannon code
 
@@ -1252,4 +1262,293 @@ Comments:
      with a close enough value
 * Other codes are even better the Shannon coding
  
+### Efficiency and redundancy of a code
 
+* **Efficiency** of a code ($M$ = size of code alphabet):
+$$\eta = \frac{H(S)}{\overline{l} \log{M}}$$
+
+* **Redundancy** of a code:
+$$\rho = 1- \eta$$
+
+* These measures indicate how close is the average length to the 
+optimal value
+
+* When $\eta = 1$: **optimal code** 
+    * for example when $l_i = -\log(p(s_i))$
+
+### Coding with the wrong code
+
+* Consider a source with probabilities $p(s_i)$
+* We use a code designed for a different source: $l_i = -\log(q(s_i))$
+* The message probabilities are $p(s_i)$ but the code is designed for $q(s_i)$
+* How much do we lose?
+* Example: different languages
+
+\ 
+
+* Codeword lengths are not optimal for this source => increased $\overline{l}$
+* If code were optimal, best average length = entropy $H(S)$:
+$$\overline{l_{optimal}} = -\sum{p(s_i) \log{p(s_i)}}$$
+* The actual average length: 
+$$\overline{l_{actual}} = \sum{p(s_i) l_i} = -\sum{p(s_i) \log{q(s_i)}}$$
+
+### The Kullback–Leibler distance
+
+* Difference is:
+$$\overline{l_{actual}} - \overline{l_{optimal}} = \sum_i{p(s_i) \log(\frac{p(s_i)}{q(s_i)})} = D_{KL}(p,q)$$
+
+
+**Definition**: the Kullback–Leibler distance of two distributions is
+$$D_{KL}(p,q) = \sum_i p(i) \log(\frac{p(i)}{q(i)})$$
+
+Properties:
+
+* Always positive:
+$$D_{KL}(p,q) \geq 0, \forall p,q$$
+* Equals 0 only when the two distributions are identical
+$$D_{KL}(p,q) = 0 <=> p(s_i) = q(s_i), \forall i$$
+
+### The Kullback–Leibler distance
+
+Where is the Kullback–Leibler distance used:
+
+* Using a code for a different distribution:
+    * Average length is increased with $D_{KL}(p,q)$
+
+* Definition of mutual information:
+    * Distance between $p(x_i \cap y_j)$ and the distribution of two independent variables $p(x_i) \cdot p(y_j)$
+$$I(X,Y) = \sum_{i,j} p(x_i \cap y_j) \log(\frac{p(x_i \cap y_j)}{p(x_i)p(y_j)})$$
+
+
+### Shannon-Fano coding (binary)
+
+Shannon-Fano (binary) coding procedure:
+
+1. Sort the message probabilities in descending order
+2. Split into two subgroups as nearly equal as possible
+3. Assign first bit $0$ to first group, first bit $1$ to second group
+4. Repeat on each subgroup
+5. When reaching one single message => that is the codeword
+
+Example: blackboard
+
+Comments:
+
+* Shannon-Fano coding does not always produce the shortest code lengths
+* Connection: yes-no answers (see example from source chapter)
+
+### Huffman coding (binary)
+
+Huffman coding procedure (binary):
+
+1. Sort the message probabilities in descending order
+2. Join the last two probabilities, insert result into existing list, preserve descending order
+3. Repeat until only two messages are remaining
+4. Assign first bit $0$ and $1$ to the final two messages
+5. Go back step by step: every time we had a sum, append $0$ and $1$ to the end of existing codeword
+
+Example: blackboard
+
+### Properties of Huffman coding
+Properties of Huffman coding:
+
+* Produces a code with the **smallest average length** (better than Shannon-Fano)
+* Assigning $0$ and $1$ can be done in any order => different codes, same lengths
+* When inserting a sum into existing list, may be equal to another value => options
+    * we can insert above, below or in-between equal values
+    * leads to codes with different *individual* lengths, but same *average* length
+* Some better algorithms exist which do not assign a codeword to every single message
+(they code a while sequence at once, not every message)
+
+### Huffman coding (M symbols)
+
+General Huffman coding procedure for codes with $M$ symbols:
+
+* Have $M$ symbols $\left\lbrace x_1, x_2, ... x_M \right\rbrace$
+* Add together the last $M$ symbols
+* When assigning symbols, assign all $M$ symbols
+* **Important**: at the final step must have $M$ remaining values
+    * May be necessary to add *virtual* messages with probability 0 at the end of the initial list,
+    to end up with exactly $M$ messages in the end
+    
+* Example : blackboard
+
+### Comparison of Huffman and Shannon-Fano coding
+
+Comparison of binary Huffman and Shannon-Fano example:
+$$p(s_i) = \left\lbrace 0.35, 0.17, 0.17, 0.16, 0.15 \right\rbrace$$
+
+
+
+## Chapter IV: Error control coding
+
+### What is error control coding?
+
+![Communication system](img/CommBlockDiagram.png){width=40%}
+
+* The second main task of coding: error control 
+* Protect information against channel errors
+
+### Mutual information and error control
+
+* Mutual information $I(X,Y)$ = the information transmitted on the channel
+* Why do we still need error control?
+
+Example: consider the following BSC channel (p = 0.01, $p(x_1) = 0.5$, $p(x_2)=0.5$):
+
+![Binary symmetric channel (BSC) ](img/BSC.png){width=25%}
+
+* The receiver would like to know the source messages 
+    * In absence of communication, the uncertainty is $H(X) = 1$ bit/msg
+    * With communication, the uncertainty is $H(X|Y) \approx 0.081$ bit/msg
+
+### Mutual information and error control
+
+* The reduction in  uncertainty due to communication = mutual information
+    * $I(X,Y) = H(X) - H(X|Y) = \approx 0.919$ bit/msg
+    
+* Even though we have large I(X,Y), about $1\%$ of all bits are erroneuos
+    * Imagine downloading a file, but having $1\%$ wrong bits
+
+###  Why is error control needed?
+
+* In most communications it is required that *all* bits are received correctly
+    * Not $1\%$ errors, not $0.1\%$, not $0.0001\%$. **None!**
+
+* But that is not possible unless the channel is ideal.
+
+* So what do to? Error control coding
+
+### Modelling the errors on the channel
+
+* We consider only binary channels (symbols = $\left\lbrace 0,1 \right\rbrace$
+* An error = a bit is changed from 0 to 1 or viceversa
+* Errors can appear:
+    * **independently**: each bit on its own
+    * in **packets of errors**: groups of errors 
+
+### Modelling the errors on the channel
+
+* Changing the value of a bit = modulo-2 sum with 1
+* Value of a bit remains the same = modulo-2 sum with 0
+    
+![Channel error model](img/ChannelErrorModel.png){width=50%}
+
+* Channel model we use (simple):
+    * The transmitted sequence is summed modulo-2 with an **error sequence**
+    * Where the error sequence is 1, there is a bit error
+    * Where the error sequence is 0, there is no error
+    
+### Error detection and error correction
+
+Binary error correction:
+
+* For binary channels, know the location of error => fix error by inverting bit
+* Locating error = correcting error
+
+Two possibilities in practice:
+
+* **Error detection**: find out if there is any error in the received sequence
+    * don't know exactly where, so cannot correct the bits, but can discard whole sequence
+    * perhaps ask the sender to retransmit (examples: TCP/IP, internet communication etc)
+    * easier to do
+* **Error correction**: find out exactly which bits have errors, if any
+    * can correct all errored bits by inverting them
+    * useful when can't retransmit (data is stored: on HDD, AudioCD etc.)
+    * harder to do than mere detection
+    
+### What is error control coding?
+
+The process of error control:
+
+1. Want to send a sequence of $k$ bits = **information word**
+$$\mathbf{i} = i_1i_2...i_k$$
+
+2. For each possible information word, the coder assigns a **codeword** of length $n > k$:
+$$\mathbf{c} = c_1c_2...c_n$$
+
+3. The codeword is sent on the channel instead of the original information word
+
+4. The receiver receives a sequence $\hat{\mathbf{c}} \approx \mathbf{c}$, with possible errors:
+$$\hat{\mathbf{c}} = \hat{c_1}\hat{c_2}...\hat{c_n}$$
+
+5. The decoding algorithm detects/corrects the errors in $\hat{\mathbf{c}}$
+
+### Definitions
+
+* An **error correcting code** is an association between the set of all possible information words to a set of codewords
+    * Each possible information word $\mathbf{i}$ has a certain codeword $\mathbf{c}$
+* The association can be done:
+    * randomly: codewords are selected and associated randomly to the information words
+    * based on a certain rule: the codeword is computed with some algorithm from the information word
+
+* A code is a **block code** if it operates with words of *fixed size*
+    * Size of information word $\mathbf{i} = k$, size of codeword $\mathbf{c} = n$, $n > k$
+    * Otherwise it is a *non-block code*
+    
+* A code is **linear** if any linear combination of codewords is also a codeword
+
+* The **coding rate** of a code is:
+$$R = k/n$$
+
+* Examples: at blackboard (random code, parity bit)
+
+### Shannon's noisy channel theorem (second theorem, channel coding theorem)
+
+* A coding rate is called **achievable** for a channel if, for that rate, there exists a coding and decoding
+algorithm guaranteed to correct all possible errors on the channel
+
+#### Shannon's noisy channel coding theorem (second theorem)
+For a given channel, all rates below capacity $R < C$ are achievable. All rates
+above capacity, $R > C$, are not achievable.
+
+### Channel coding theorem explained
+
+In layman terms:
+
+* For all coding rates $R<C$, there is a way to recover the transmitted data perfectly (decoding algorithm will detect and correct
+all errors)
+* For all coding rates $R>C$, there is no way to recover the transmitted data perfectly
+
+Example:
+
+* Send binary digits (0,1) on a BSC channel with capacity 0.7 bits/message
+* For any coding rate $R < 0.7$ there exist error correction codes that allow perfect recovery
+    * i.e. for every 7 bits of data coding adds slightly more than 3 bits, on average => $R < \frac{7}{7+3}$
+* With less than 3 bits for every 7 bits of data => impossible to recover all the data
+
+### Ideas behind channel coding theorem
+
+* The rigorous proof of the theorem is too complex to present
+* Key ideas of the proof:
+    * Use very long information words, $k \to \infty$
+    * Use random codes, compute the probability of having error after decoding
+    * If $R < C$, *in average for all possible codes*, the probability of error after decoding goes to 0
+    * If the average for all codes goes to 0, there exists at least on code better than the average
+    * That is the code we should use
+    
+* !! **The theorem does not tell what code to use**, only that some code exists
+* There is no hint of how to actually find the code
+* Except general principles:
+    * using longer information words is better
+    * random codewords are generally good
+    
+* In practice, cannot use infinitely long codewords, so will only get a *good enough* code
+
+### Practical scenario
+
+Practical ideas for error correcting codes:
+* If a codeword $\mathbf{c_1}$ is received with errors and becomes identical to another codeword $\mathbf{c_2}$ ==> cannot detect any errors
+    * Receiver will think it received a correct codeword $c_2$ and the information word was $\mathbf{i_2}$, but actually it was $\mathbf{i_1}$
+* We want codewords as different as possible from each other
+* How to measure this difference?
+
+Hamming distance
+* The **Hamming distance** of two binary sequences $a$, $b$ of length $n$ = the total number
+of bit differences between them
+$$d(a, b) = \sum_{i=1}^N a_i \bigoplus b_i$$
+
+* It satisfies the 3 properties of a metric function:
+    1. $d(a,b) \geq 0 \forall a,b$, with $d(a,b) = 0 \Leftrightarrow a = b$
+    2. $d(a,b) = d(b,a), \forall a,b$
+    3. $d(a,c) = d(a,b) + d(b,c), \forall a,b,c$
