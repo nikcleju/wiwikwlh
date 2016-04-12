@@ -1378,7 +1378,36 @@ General Huffman coding procedure for codes with $M$ symbols:
 Comparison of binary Huffman and Shannon-Fano example:
 $$p(s_i) = \left\lbrace 0.35, 0.17, 0.17, 0.16, 0.15 \right\rbrace$$
 
+### Coding followed by channel
 
+* For every symbol $x_i, i \in \left\lbrace 1, 2 ... M \right\rbrace$
+we can compute the average number of symbols $x_i$ in a codeword
+$$\overline{l_{x_i}} = \sum_i p(s_i) l_{x_i}(s_i)$$
+
+* (here $l_{x_i}(s_i) =$ number of symbols $x_i$ in codeword of $s_i$)
+
+* Divide by average length => obtain probability (frequency) of symbol $x_i$
+$$p(x_i) = \frac{\overline{l_{x_i}}}{\overline{l}}$$
+
+* These are the symbol probabilities at the input of the following channel
+
+* Example: binary code ($\overline{l_0}$, $\overline{l_1}$, $p(0)$, $p(1)$)
+
+### Chapter summary
+
+* Average length: $\overline{l} = \sum_i p(s_i) l_i$
+* Code types: instantaneous $\subset$ uniquely decodable $\subset$ non-singular
+* All instantaneous or uniqualy decodable code must obey Kraft inequality
+$$ \sum_i D^{-l_i} \leq 1$$
+* Optimal codes: $l_i = -\log(p(s_i))$, $\overline{l_{min}} = H(S)$
+* Shannon's first theorem: use $n$-th order extension of $S$, $S^n$:
+$$\boxed{H(S) \leq \overline{l_{S}} < H(S) + \frac{1}{n}}$$
+    * average length can get as close as possible to $H(S)$
+    * average length can never be smaller than $H(S)$
+* Coding techniques:
+    * Shannon: ceil optimal codeword lengths (round to upper)
+    * Shannon-Fano: split in two groups approx. equal
+    * Huffman: best
 
 ## Chapter IV: Error control coding
 
@@ -1544,6 +1573,7 @@ Practical ideas for error correcting codes:
 * How to measure this difference?
 
 Hamming distance
+
 * The **Hamming distance** of two binary sequences $a$, $b$ of length $n$ = the total number
 of bit differences between them
 $$d(a, b) = \sum_{i=1}^N a_i \bigoplus b_i$$
