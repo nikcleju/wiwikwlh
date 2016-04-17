@@ -1650,7 +1650,7 @@ Decoding:
 * Error detecting: 
     * check if $r$ is part of the codewords of the code $C$:
     * if $r$ is part of the code, decide that there have been no errors
-    * if $r$ is, decide that there have been errors
+    * if $r$ is not a codeword, decide that there have been errors
 
 * Error correcting:
     * choose codeword **nearest** to the received $\mathbf{r}$, in terms of Hamming distance
