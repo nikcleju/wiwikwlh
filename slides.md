@@ -1467,6 +1467,7 @@ Example: consider the following BSC channel (p = 0.01, $p(x_1) = 0.5$, $p(x_2)=0
     * The transmitted sequence is summed modulo-2 with an **error sequence**
     * Where the error sequence is 1, there is a bit error
     * Where the error sequence is 0, there is no error
+$$\mathbf{r} = \mathbf{c} + \mathbf{e}$$
     
 ### Error detection and error correction
 
@@ -1520,7 +1521,49 @@ $$\hat{\mathbf{c}} = \hat{c_1}\hat{c_2}...\hat{c_n}$$
 * The **coding rate** of a code is:
 $$R = k/n$$
 
+
+### Definitions
+
+* A code $C$ is an **$t$-error-detecting** code if it is able to *detect* $t$ errors
+
+* A code $C$ is an **$t$-error-correcting** code if it is able to *correct* $t$ errors
+
 * Examples: at blackboard (random code, parity bit)
+
+
+### Intuitive example: parity bits
+
+* Add parity bit to a 8-bit long information word, before sending on a channel
+    * coding rate $R = 8/9$
+    * can detect 1 error in a 9-bit codeword
+    * cannot correct error (don't know where it is located)
+    
+* Add more parity bits to be able to locate the error
+    * Example at blackboard
+    * coding rate $R = 8/12$
+    * can detect and correct 1 error in a 9-bit codeword
+
+### Intuitive example: repetition code
+
+* Example from laboratory 4:
+    * want to send a $k$-bit information word
+    * send codeword = the information word repeated 5 times
+    * coding rate $R = k/n = 1/5$
+    * can detect and correct 2 errors, and maybe even more 
+    if they do not affect the same bit
+    * not as efficient as other codes
+
+### Redundancy
+
+* Because $k < n$, we introduce **redundancy**
+    * to transmit $k$ bits of information we actually send more bits ($n$) 
+    
+* Error control coding adds redundancy, while source coding (Chapter III) aims to reduce redundancy
+    * but redundancy is added in a controlled way, with a purpose
+    
+* In practice:
+    1. First perform source coding, eliminating redundancy in representation of data
+    2. Then perform error control coding, adding redundancy for protection
 
 ### Shannon's noisy channel theorem (second theorem, channel coding theorem)
 
@@ -1567,18 +1610,229 @@ Example:
 ### Practical scenario
 
 Practical ideas for error correcting codes:
+
 * If a codeword $\mathbf{c_1}$ is received with errors and becomes identical to another codeword $\mathbf{c_2}$ ==> cannot detect any errors
     * Receiver will think it received a correct codeword $c_2$ and the information word was $\mathbf{i_2}$, but actually it was $\mathbf{i_1}$
 * We want codewords as different as possible from each other
 * How to measure this difference?
+* Hamming distance
 
-Hamming distance
+### Hamming distance
 
 * The **Hamming distance** of two binary sequences $a$, $b$ of length $n$ = the total number
 of bit differences between them
-$$d(a, b) = \sum_{i=1}^N a_i \bigoplus b_i$$
+$$d_H(a, b) = \sum_{i=1}^N a_i \bigoplus b_i$$
+
+* We need at least $d_H(a, b)$ bit changes to convert one sequence into another
 
 * It satisfies the 3 properties of a metric function:
     1. $d(a,b) \geq 0 \forall a,b$, with $d(a,b) = 0 \Leftrightarrow a = b$
     2. $d(a,b) = d(b,a), \forall a,b$
     3. $d(a,c) = d(a,b) + d(b,c), \forall a,b,c$
+
+* The **minimum Hamming distance of a code**, ${d_H}_{min}$ = the minimum Hamming distance
+between any two codewords $\mathbf{c_1}$ and $\mathbf{c_2}$
+
+* Example at blackboard
+
+
+### Nearest-neighbor decoding
+
+Coding:
+
+* Design a code with minimum Hamming distance ${d_H}_{min}$
+* Send a codeword $\mathbf{c}$ of the code
+    
+Decoding:
+
+* Receive a word $\mathbf{r}$, that may have errors
+
+* Error detecting: 
+    * check if $r$ is part of the codewords of the code $C$:
+    * if $r$ is part of the code, decide that there have been no errors
+    * if $r$ is, decide that there have been errors
+
+* Error correcting:
+    * choose codeword **nearest** to the received $\mathbf{r}$, in terms of Hamming distance
+    * (if $\mathbf{r}$ is a codeword, leave unchanged)
+    * this is known as **nearest-neighbor decoding**
+    
+### Performance of nearest neighbor decoding
+
+Theorem:
+
+If the minimum Hamming distance of a code is ${d_H}_{min}$:
+
+1. the code can *detect* up to **${d_H}_{min} - 1$** errors
+2. the code can *correct* up to **$\left\lfloor \frac{{d_H}_{min} - 1}{2} \right\rfloor$** errors using nearest-neighbor decoding
+
+
+### Performance of nearest neighbor decoding
+
+Proof:
+
+1. at least ${d_H}_{min}$ binary changes are needed to change one codeword into another, ${d_H}_{min} - 1$ is not enough => the errors are detected
+2. the received word $\mathbf{r}$ is closer to the original codeword than to any other codeword => nearest-neighbor algorithm will find the correct one
+    * because $\left\lfloor \frac{{d_H}_{min} - 1}{2} \right\rfloor$ = less than half the distance to another codeword
+
+Note: if the number of errors is higher, can fail:
+
+* Detection failure: decide that there were no errors, even if they were (more than ${d_H}_{min} - 1$)
+* Correction failure: choose a wrong codeword
+
+Example: blackboard
+
+
+### Linear block codes
+
+* A code is a **block code** if it operates with words of *fixed size*
+    * Size of information word $\mathbf{i} = k$, size of codeword $\mathbf{c} = n$, $n > k$
+    * Otherwise it is a *non-block code*
+    
+* A code is **linear** if any linear combination of codewords is also a codeword
+
+* A code is called **systematic** if the codeword contains all the information bits at the beginning, followed by other bits
+    * coding adds supplementary bits after the information bits
+    
+* Otherwise the code is called **non-systematic**
+    * the information bits are not explicitly visible in the codeword
+
+* Example: at blackboard
+
+### Generator matrix 
+
+* All codewords for a linear block code can be generated via a matrix multiplication:
+$$\mathbf{i} \cdot [G] = \mathbf{c}$$
+
+![Codeword construction with generator matrix](img/GeneratorMatrix.png){width=50%}
+
+* $[G]$ = **generator matrix** of size $k \times n$
+
+* All operations are done in modulo-2 arithmetic:
+    * $0 \oplus 0 = 0$, $0 \oplus 1 = 1$, $1 \oplus 0 = 1$, $1 \oplus 1 = 0$
+    * multiplications as usual
+    
+* Row-wise interpretation:
+    * $\mathbf{c}$ = a linear combination of rows in $[G]$
+    * The rows of $[G]$ = a *basis* for the linear code
+
+### Parity check matrix
+
+* How to check if a binary word is a codeword or not
+* Every $k \times n$ generator matrix $[G]$ has complementary matrix $[H]$ such that
+$$0 = [H] \cdot [G]^T$$
+
+* For every codeword $\mathbf{c}$ generated with $[G]$:
+$$\boxed{ 0 = [H] \cdot \mathbf{c}^T }$$
+
+* because:
+$$\mathbf{i} \cdot [G] = \mathbf{c}$$
+$$[G]^T \cdot \mathbf{i}^T = \mathbf{c}^T$$
+$$[H] \cdot \mathbf{c}^T = [H] \cdot [G]^T \cdot \mathbf{i}^T = 0$$
+
+### Parity check matrix
+
+* $[H]$ is the **parity-check matrix**, size = $(n-k) \times n$
+* $[G]$ and $[H]$ are related, one can be deduced from the other
+* The resulting vector $z = [H] \cdot [c]^T$ is the **syndrome**
+* All codewords generated with $[G]$ will produce $0$ when multiplied with $[H]$
+* All binary sequences that are not codewords will produce $\neq 0$ when multiplied with $[H]$
+
+* Column-wise interpretation of multiplication:
+
+![Codeword checking with parity-check matrix](img/ParityCheckMatrix.png){width=30%}
+
+### [G] and [H] for systematic codes
+
+* For systematic codes, [G] and [H] have special forms
+* Generator matrix
+    * first part = identity matrix
+    * second part = some matrix $Q$
+$$[G]_{k \times n} = [I_{k \times k} \;\; Q_{k \times (n-k)}]$$
+
+* Parity-check matrix
+    * first part = same Q, transposed
+    * second part = identity matrix
+$$[H]_{(n-k) \times n} = [Q^T_{(n-k) \times k} \;\; I_{(n-k) \times (n-k)}]$$
+
+* Can easily compute one from the other
+
+* Example at blackboard
+
+### Interpretation as parity bits
+
+* The additional bits added by coding are just parity bits
+
+* Generator matrix $[G]$ creates the codeword as:
+    * first part = information bits (systematic code, first part of $[G]$ is identity matrix)
+    * additional bits = combinations of information bits = *parity bits*
+
+* Parity-check matrix $[H]$ checks if parity bits correspond to information bits
+    * if all are ok, the syndrome $\mathbf{z} = 0$ 
+    * otherwise the syndrome $\mathbf{z} \neq 0$ 
+
+* This is all just parity bits!
+
+
+### Syndrome-based error detection
+
+Syndrome-based error *detection* for linear block codes:
+
+1. generate codewords with generator matrix:
+$$\mathbf{i} \cdot [G] = \mathbf{c}$$
+
+2. send codeword $\mathbf{c}$ on the channel
+3. random error word $\mathbf{e}$ is applied on the channel
+4. receive word $\mathbf{r} = \mathbf{c} \oplus \mathbf{e}$
+
+5. compute **syndrome** of $\mathbf{r}$:
+$$\mathbf{z} = [H] \cdot \mathbf{r}^T$$
+
+6. Decide:
+    * If $\mathbf{z} = 0$ => $\mathbf{r}$ has no errors
+    * If $\mathbf{z} \neq 0$ => $\mathbf{r}$ has errors
+
+### Syndrome-based error correction
+
+Syndrome-based error *correction* for linear block codes:
+
+* $\mathbf{z} \neq 0$ => $\mathbf{r}$ has errors, we need to locate them
+
+* The syndrome is the effect only of the error word:
+$$\mathbf{z} = [H] \cdot \mathbf{r}^T = [H] \cdot (\mathbf{c}^T \oplus \mathbf{e}^T) = [H] \cdot \mathbf{e}^T$$
+
+7. Create a **syndrome lookup table**:
+    * for every possible error word $\mathbf{e}$, compute the syndrome $\mathbf{z} = [H] \cdot \mathbf{e}^T$
+    * start with error words with 1 error (most likely), then with 2 errors (less likely), and so on
+
+8. Locate the syndrome $\mathbf{z}$ in the table, read the corresponding error word $\mathbf{\hat{e}}$
+
+9. Find the correct word:
+    * adding the error word again will invert the errored bits back to the originals
+$$\mathbf{\hat{c}} = \mathbf{r}  \oplus \mathbf{\hat{e}}$$
+
+### Example
+
+Example: at blackboard
+
+### Conditions on [H] for error detection and correction
+
+Error detection:
+
+* To detect a single error: every column of $[H]$ must be non-zero
+* To detect two error: sum of any two columns of $[H]$ cannot be zero
+    * that means all columns are different
+* To detect $n$ errors: sum of any $n$ or less columns of $[H]$ cannot be zero
+
+Error correction (using syndrome-based decoding):
+
+* To correct a single error: all columns of $[H]$ are different
+    * so the syndromes, for a single error, are all different
+* To correct $n$ errors: sum of any $n$ or less columns of $[H]$ are all different
+    * much more difficult to obtain than for decoding
+
+### Hamming codes
+
+* Basic class of linear error-correcting codes
+
+
