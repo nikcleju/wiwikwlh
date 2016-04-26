@@ -1628,7 +1628,7 @@ $$d_H(a, b) = \sum_{i=1}^N a_i \bigoplus b_i$$
 * It satisfies the 3 properties of a metric function:
     1. $d(a,b) \geq 0 \forall a,b$, with $d(a,b) = 0 \Leftrightarrow a = b$
     2. $d(a,b) = d(b,a), \forall a,b$
-    3. $d(a,c) = d(a,b) + d(b,c), \forall a,b,c$
+    3. $d(a,c) \leq d(a,b) + d(b,c), \forall a,b,c$
 
 * The **minimum Hamming distance of a code**, ${d_H}_{min}$ = the minimum Hamming distance
 between any two codewords $\mathbf{c_1}$ and $\mathbf{c_2}$
@@ -1640,7 +1640,7 @@ between any two codewords $\mathbf{c_1}$ and $\mathbf{c_2}$
 
 Coding:
 
-* Design a code with minimum Hamming distance ${d_H}_{min}$
+* Design a code with large ${d_H}_{min}$
 * Send a codeword $\mathbf{c}$ of the code
     
 Decoding:
@@ -1666,6 +1666,9 @@ If the minimum Hamming distance of a code is ${d_H}_{min}$:
 1. the code can *detect* up to **${d_H}_{min} - 1$** errors
 2. the code can *correct* up to **$\left\lfloor \frac{{d_H}_{min} - 1}{2} \right\rfloor$** errors using nearest-neighbor decoding
 
+Consequence:
+
+* It is good to have ${d_H}_{min}$ as large as possible
 
 ### Performance of nearest neighbor decoding
 
@@ -1691,8 +1694,10 @@ Example: blackboard
     
 * A code is **linear** if any linear combination of codewords is also a codeword
 
-* A code is called **systematic** if the codeword contains all the information bits at the beginning, followed by other bits
-    * coding adds supplementary bits after the information bits
+* A code is called **systematic** if the codeword contains all the information bits explicitly, unaltered
+    * coding merely adds supplementary bits besides the information bits
+    * codeword has two parts: the information bits and the parity bits
+    * example: parity bit added after the information bits
     
 * Otherwise the code is called **non-systematic**
     * the information bits are not explicitly visible in the codeword
@@ -1831,8 +1836,91 @@ Error correction (using syndrome-based decoding):
 * To correct $n$ errors: sum of any $n$ or less columns of $[H]$ are all different
     * much more difficult to obtain than for decoding
 
+Rearranging the columns of $[H]$ (the order of bits in the codeword) does not affect performance
+
 ### Hamming codes
 
-* Basic class of linear error-correcting codes
+* Simple class of linear error-correcting codes
+
+* Definition: a **Hamming code** is a linear block code where the columns of $[H]$
+are *the binary representation of all numbers from 1 to $2^r$*, $\forall r \geq 2$
+
+* Example (blackboard): (7,4) Hamming code
+
+* Systematic: arrange the $r$ columns with a single 1 to the right, forming identity matrix
+    * Can compute generator matrix $[G]$
+    
+* Non-systematic: columns in natural order
+    * no significant difference from systematic case
+
+### Properties of Hamming codes
+
+* From definition of $[H]$ (systematic) it follows:
+    1. Codeword has length $n = 2^r - 1$
+    2. $r$ bits are parity bits
+    3. $k = 2^r-r-1$ bits are information bits
+
+* Same for non-systematic, but bits are arranged differently
+
+* Notation: **(n,k) Hamming code**
+    * n = codeword length = $2^r-1$, 
+    * k = number of information bits  = $2^r - r - 1$
+    * Example: (7,4) Hamming code, (15,11) Hamming code, $(127,120)$ Hamming code
+
+### Properties of Hamming codes
+
+* Can detect two errors
+	* All columns are different => can detect 2 errors
+	* Sum of two columns equal to a third => cannot correct 3
+
+**OR**
+
+* Can correct one error
+	* All columns are different => can correct 1 error
+	* Sum of two columns equal to a third => cannot correct 2
+	* Non-systematic: syndrome = error position
+
+* But not simultaneously!
+    * same non-zero syndrome can be obtained with 1 or 2 errors, can't distinguish
+
+### SECDED Hamming codes
+ 
+* Add an additional parity bit to differentiate the two cases
+    * = sum of all $n$ bits of the codeword
+
+* Compute syndrome of the received word *without the additional parity bit*
+	* If 1 error happened: syndrome is non-zero, parity bit does not match
+	* If 2 errors happened: syndrome is non-zero, parity bit matches (the two errors cancel out)
+	* If 3 errors happened: same as 1, can't differentiate
+
+* Now can simultaneously differentiate between:
+    * 1 error: perform correction
+    * 2 errors: detect, but do not perform correction
+    
+* If correction is never attempted, can detect up to 3 errors
+    * minimum Hamming distance = 4 (no proof)
+    * don't know if 1 error or more, so can't try correction
+    
+* Known as SECDED Hamming codes
+    * **S**ingle **E**rror **C**orrection - **D**ouble **E**rror **D**etection
+
+### Decoding SECDED Hamming codes
+
+
+Decoding with detection and correction
+
+1. Compute syndrome of received word without the additional parity bit
+2. If zero, no error
+3. If non-zero, check parity bit:
+    a. If does not match => one error => perform correction
+    b. If does match => two errors => do not correct
+    
+Decoding with detection only
+
+1. Compute syndrome of received word, also check additional parity bit
+2. If syndrome is zero and parity bit is ok => no error
+3. If syndrome non-zero or parity bit does not match => 1 or 2 or 3 errors have happened, do not correct
+    
+
 
 
