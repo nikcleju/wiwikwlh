@@ -1921,6 +1921,50 @@ Decoding with detection only
 2. If syndrome is zero and parity bit is ok => no error
 3. If syndrome non-zero or parity bit does not match => 1 or 2 or 3 errors have happened, do not correct
     
+    
+### Summary until now
 
+### Cyclic codes
 
+Definition: **cyclic codes** are a particular class of linear block codes
+for which *every cyclic shift of a codeword is also a codeword*
 
+* Cyclic shift: cyclic rotation of a sequence of bits (any direction)
+
+* Are a particular class of linear block codes, so all the theory up to now still applies
+    * they have a generator matrix, parity check matrix etc.
+    
+* But they can be implemented more efficient than general linear block codes (e.g. Hamming)
+
+* Used **everywhere** under the common name **CRC** (**C**yclic **R**edundancy **C**heck)
+    * Network communications (Ethernet), data storage in Flash memory
+
+### Binary polynomials
+
+* Every binary sequence corresponds to a polynomial with binary coefficients:
+$$10010111 \rightarrow 1 \oplus X^3 \oplus X^5 \oplus X^6 \oplus X^7$$
+
+(From now on, by "codeword" we also mean the corresponding polynomial)
+
+* Can perform all operations with these polynomials:
+    * addition, multiplication, division etc. (examples)
+
+* There are efficient circuits for performing multiplications
+
+### Circuits for multiplication binary polynomials
+
+### Circuits for division binary polynomials
+
+### Construction of cyclic codewords
+
+**Theorem**: 
+
+All the codewords of a cyclic code are multiples of a certain polynomial $g(x)$,
+known as **generator polynomial**. 
+The generator polynomial has first and last coefficient equal to 1.
+
+* Size of polynomials:
+    * The codeword = polynomial of degree $n$
+    * The generator polynomial $g(x)$ = polynomial of degree $m$ ($m < n$)
+    * The information polynomial = polynomial of degree $k$
+$$ k + m = n$$
