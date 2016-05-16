@@ -1924,6 +1924,18 @@ Decoding with detection only
     
 ### Summary until now
 
+* Systematic codes: information bits + parity bits
+* Generator matrix: use to generate codeword
+$$\mathbf{i} \cdot [G] = \mathbf{c}$$
+* Parity-check matrix: use to check if a codeword
+$$0 = [H] \cdot \mathbf{c}^T$$
+* Syndrome:
+$$\mathbf{z} = [H] \cdot \mathbf{r}^T$$
+* Syndrome-based error detection: syndrome non-zero
+* Syndrome-based error correction: lookup table
+* Hamming codes: $[H]$ contains all numbers $1 ... 2^r - 1$
+* SECDED Hamming codes: add an extra parity bit
+
 ### Cyclic codes
 
 Definition: **cyclic codes** are a particular class of linear block codes
@@ -1953,18 +1965,112 @@ $$10010111 \rightarrow 1 \oplus X^3 \oplus X^5 \oplus X^6 \oplus X^7$$
 
 ### Circuits for multiplication binary polynomials
 
+![Circuits for polynomial multiplication](img/MultiplicationCircuits.png){width=90%}
+
 ### Circuits for division binary polynomials
 
-### Construction of cyclic codewords
+![Circuits for polynomial division](img/DivisionCircuits.png){width=90%}
+
+### Generator polynomial
 
 **Theorem**: 
 
 All the codewords of a cyclic code are multiples of a certain polynomial $g(x)$,
 known as **generator polynomial**. 
-The generator polynomial has first and last coefficient equal to 1.
 
-* Size of polynomials:
-    * The codeword = polynomial of degree $n$
-    * The generator polynomial $g(x)$ = polynomial of degree $m$ ($m < n$)
-    * The information polynomial = polynomial of degree $k$
-$$ k + m = n$$
+Properties of generator polynomial $g(x)$:
+
+* The generator polynomial has first and last coefficient equal to 1.
+* The generator polynomial is a factor of $X^n \oplus 1$
+* The *degree* of $g(x)$ is $n-k$, where:
+    * The codeword = polynomial of degree $n-1$ ($n$ coefficients)
+    * The information polynomial = polynomial of degree $k-1$ ($k$ coefficients)
+$$ (k-1) + (n-k) = n-1$$
+
+### Finding a generator polynomial
+
+**Theorem**: 
+
+If $g(x)$ is a polynomial of degree $(n-k)$ and is a factor of $X^n \oplus 1$, 
+then $g(x)$ generates a $(n,k)$ cyclic code
+
+Example:
+
+$$x^7 \oplus 1 = (1 \oplus X)(1 \oplus X + \oplus X^3)(1 \oplus X^2 \oplus X^3)$$
+
+Each factor generates a code:
+
+* $1 \oplus X$ generates a (7,6) cyclic code
+* $1 \oplus X \oplus X^3$ generates a (7,4) cyclic code
+* $1 \oplus X^2 \oplus X^3$ generates a (7,4) cyclic code
+
+### Computing the codewords
+
+**Non-systematic** codeword generation:
+
+* Codeword = information polynomial * $g(x)$
+
+$$\boxed{c(x) = i(x) \cdot g(x)}$$
+
+**Systematic** codeword generation:
+
+$$\boxed{c(x) = b(x) + X^{n-k}i(x)}$$
+
+where $b(x)$ is the remainder of dividing $X^{n-1} i(x)$ to $g(x)$:
+$$X^{n-1} i(x) = a(x) g(x) \oplus b(x)$$
+
+* (Proof: at blackboard)
+
+### Cyclic code encoder circuits
+
+* Coding = based on polynomial multiplications and divisions
+* Efficient circuits for multiplication / division exist
+
+* Similar circuit exists for systematic codeword generation (draw on blackboard)
+
+### Error detection with cyclic codes
+
+* Like usual for linear codes: check if received word is codeword or not
+
+* Every codeword is multiple of $g(x)$
+
+* Check if received word is actually dividing with $g(x)$
+    * Use a circuit for division of polynomials
+    
+* If remainder is 0 => it is a codeword, no error
+
+* If remainder is non-0 => error detected!
+
+* Cyclic codes have very good error detection capabilities
+
+### Error correction capability
+
+Theorem:
+
+Any (n,k) cyclic codes is capable of detecting any error **burst** of length $n-k$ or less.
+
+* A large fraction of longer bursts can also be detected (but not all)
+
+* For non-burst errors (random): more difficult to analyze
+
+### Error correction with cyclic codes
+
+* Like usual for linear codes: lookup table based on remainder
+
+* Remainder of division = the effect of the error polynomial
+
+* Create lookup table: for every error word, compute remainder
+
+* Search the table for the remainder of the received word => find error word
+
+### Summary of cyclic codes
+
+* Generated using a generator polynomial $g(x)$
+* Non-systematic:
+$$c(x) = i(x) \cdot g(x)$$
+* Systematic:
+$$c(x) = b(x) + X^{n-k}i(x)$$
+    *  $b(x)$ is the remainder of dividing $X^{n-1} i(x)$ to $g(x)$
+* Syndrome = remainder of division $r(x)$ to $g(x)$
+* Error detection: remainder (syndrome) non-zero
+* Error correction: lookup table 
