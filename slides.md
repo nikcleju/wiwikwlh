@@ -1954,7 +1954,7 @@ for which *every cyclic shift of a codeword is also a codeword*
 ### Binary polynomials
 
 * Every binary sequence corresponds to a polynomial with binary coefficients:
-$$10010111 \rightarrow 1 \oplus X^3 \oplus X^5 \oplus X^6 \oplus X^7$$
+$$10010111 \rightarrow X^7 \oplus X^4 \oplus X^2 \oplus X \oplus 1$$
 
 (From now on, by "codeword" we also mean the corresponding polynomial)
 
@@ -2014,10 +2014,10 @@ $$\boxed{c(x) = i(x) \cdot g(x)}$$
 
 **Systematic** codeword generation:
 
-$$\boxed{c(x) = b(x) + X^{n-k}i(x)}$$
+$$\boxed{c(x) = b(x) \oplus X^{n-k}i(x)}$$
 
-where $b(x)$ is the remainder of dividing $X^{n-1} i(x)$ to $g(x)$:
-$$X^{n-1} i(x) = a(x) g(x) \oplus b(x)$$
+where $b(x)$ is the remainder of dividing $X^{n-k} i(x)$ to $g(x)$:
+$$X^{n-k} i(x) = a(x) g(x) \oplus b(x)$$
 
 * (Proof: at blackboard)
 
@@ -2069,8 +2069,8 @@ Any (n,k) cyclic codes is capable of detecting any error **burst** of length $n-
 * Non-systematic:
 $$c(x) = i(x) \cdot g(x)$$
 * Systematic:
-$$c(x) = b(x) + X^{n-k}i(x)$$
-    *  $b(x)$ is the remainder of dividing $X^{n-1} i(x)$ to $g(x)$
+$$c(x) = b(x) \oplus X^{n-k}i(x)$$
+    *  $b(x)$ is the remainder of dividing $X^{n-k} i(x)$ to $g(x)$
 * Syndrome = remainder of division $r(x)$ to $g(x)$
 * Error detection: remainder (syndrome) non-zero
 * Error correction: lookup table 
