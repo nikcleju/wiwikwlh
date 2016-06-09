@@ -79,51 +79,35 @@ Those who pass the partial exam, will have a final exam only from the final two 
  
 Those who do not attend or do not pass the partial exam, will take a full exam at the end, as usual.
 
-Practical exercises: will be similar to the problems solved at the seminars and the examples given 
-during the lectures.
+**Practical exercises:** will be very similar to the problems solved at the seminars and the examples given 
+during the lectures. I cannot give you any other example.
 
-Theoretical subjects: the following list shows what you should read & know.
-*Note*: the subjects will not necessary be identical to one of the items below, there may be
-combinations of them, rephrased differently etc. This is an indication of what you should know, 
-not a final list of subjects.
+**Theoretical subjects (condensed list):**
 
 * Chapter I: Discrete Information Sources
-    * What is a discrete complete memoryless source, what does every term mean (discrete, complete, memoryless)
-    * Information of an event: definition, properties (with proofs)
-	* Definition of entropy for a memoryless source, choosing logarithm base, examples
-	* Interpretation of entropy
-	* Properties of entropy, with proofs (3 properties: non-negative, maximum, diversification)
-	* Plot of the entropy of a binary source, explain shape
-	* Definition of information flow 
-	* N-th order extension of a source, definition, example
-	* Entropy of a N-th order extension, with proof
-	* Sources with memory, definition, notations, example
-	* Entropy in a single state
-	* What is an ergodic source, what property do they have, example
-	* Entropy of an ergodic source with memory: definition (the relation), explain terms
+    1. Definitions of: discrete memoryless source, information of a particular event, entropy of a memoryless source. Examples.
+    2. Properties of entropy, with proofs (3 properties: non-negative, maximum, diversification).The proof of the second property only for the particular case of a source with two messages (as we did in class)
+    3. Entropy of a N-th order extension, with proof only for the particular case of 2nd order extension (as we did in class)
+    4. Definition of: source with memory m, state of a source with memory, transition, transition matrix, ergodic source.
 
 * Chapter II: Discrete Transmission Channels
-	* What is a discrete memoryless stationary transmission channel, explain each term
-	 (discrete / memoryless / stationary)
-	* Definition of the joint probability matrix and the joint entropy, example
-	* Definition of marginal distributions, how to compute
-	* Definition of channel matrix, relation to joint probability matrix
-	* Rigorous definition of a discrete memoryless transmission (what it is defined by)
-	* Graph representation of a channel, example
-	* Conditional entropy H(Y|X): definition, where to compute from
-	* Definition of equivocation matrix, relation to joint probability matrix
-	* Equivocation (conditional entropy H(Y|X)) : definition, where to compute from
-	* Properties of conditional entropies, with proofs
-	* Mutual information: definition, equation
-	* Properties of mutual information (without proofs)
-	* Relations between informational measures, graphical interpretation (two circles etc.)
-	* Particular types of communication channels (zero equivocation, zero average error)
-	* Definition of uniform with respect to input, uniform with respect to output, examples
-	* Definition of symmetric channels, example
-	* Channel capacity: definition (what it means), equation
-	* (Note: preview of the channel coding theorem **not required**)
-	* Efficiency and redundancy of a channel
-	* Compute the capacity of binary symmetric channel
-	* Compute the capacity of binary erasure channel
-	* Compute the capacity of symmetric channel of N-th order
- 
+    1. Definition of a discrete transmission channel. The joint probability matrix, the channel matrix, and the relation between them.
+    2. Mutual information: definition, equation, properties (three properties, without proofs, just stated)
+    3. Particular types of communication channels: zero equivocation, zero average error, uniform with respect to the input, uniform with respect to the output, symmetric
+    4. Definition of channel capacity. Efficiency and redundancy of a channel
+    5. Capacity of a binary symmetric channel (with proof)
+
+* Chapter III: Source coding
+    1. Definition of non-singular, uniquely decodable and instantaneous code. Relation between them. Examples.
+    2. Kraft inequality theorem (with proof).
+    3. Average length of a Shannon code (with proof).
+    4. Shannon's first theorem (with proof on slides).
+
+* Chapter IV:
+    1. Definitions: error correcting code, block code, linear code, coding rate, t-error-detecting code, t-error-correcting code, systematic code, cyclic code
+    2. Definition of Hamming distance and minimum Hamming distance of a code. Number of errors that can be detected or corrected depending on dHmin (with proof)
+    3. Conditions on matrix [H] for error detection and correction
+    4. Hamming codes: definition, example of matrix [H], properties
+
+*Note*: "No proof" means that you should only state the theorem / definition / property, without any proof. "With proof" means I expect the proof to be included.
+
