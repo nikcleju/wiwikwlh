@@ -111,3 +111,8 @@ during the lectures. I cannot give you any other example.
 
 *Note*: "No proof" means that you should only state the theorem / definition / property, without any proof. "With proof" means I expect the proof to be included.
 
+# Exam results
+
+The final grades following the exam on 13.06.2016 are [here](grades/NoteFinaleTCI_2015_2016_password.pdf).
+The password is your group number. 
+
