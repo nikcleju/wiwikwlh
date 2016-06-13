@@ -1843,7 +1843,7 @@ Rearranging the columns of $[H]$ (the order of bits in the codeword) does not af
 * Simple class of linear error-correcting codes
 
 * Definition: a **Hamming code** is a linear block code where the columns of $[H]$
-are *the binary representation of all numbers from 1 to $2^r$*, $\forall r \geq 2$
+are *the binary representation of all numbers from 1 to $2^r-1$*, $\forall r \geq 2$
 
 * Example (blackboard): (7,4) Hamming code
 
