@@ -116,3 +116,6 @@ during the lectures. I cannot give you any other example.
 The final grades following the exam on 13.06.2016 are [here](grades/NoteFinaleTCI_2015_2016_password.pdf).
 The password is your group number. 
 
+The final grades following the re-exam (restanta) on 02.07.2016 are [here](grades/RestantaIT_2016_07_02_pwd.pdf).
+The password is your group number. 
+
