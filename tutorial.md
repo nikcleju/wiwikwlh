@@ -119,3 +119,9 @@ The password is your group number.
 The final grades following the re-exam (restanta) on 02.07.2016 are [here](grades/RestantaIT_2016_07_02_pwd.pdf).
 The password is your group number. 
 
+The final grades following the re-exam (restanta) on 05.09.2016 are [here](grades/RestantaIT_2016_09_05_pwd.pdf).
+The password is your group number. 
+
+The final grades following the re-examination on 16.09.2016 are [here](grades/ReexaminareIT_2016_09_16_pwd.pdf).
+The password is your group number. 
+
